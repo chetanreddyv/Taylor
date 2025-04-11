@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nimp.AI Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #0073b1;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #0073b1;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nimp.AI Settings</h1>
+  
+  <div class="form-group">
+    <label for="apiKey">ChatGPT API Key:</label>
+    <input type="text" id="apiKey" placeholder="sk-...">
+    <p>Get your API key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API Keys</a></p>
+  </div>
+  
+  <button id="saveButton">Save Settings</button>
+  
+  <div class="status" id="status"></div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
