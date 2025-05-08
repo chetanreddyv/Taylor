@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Taylor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base gradient background for the body */
+        body {
+            background: linear-gradient(135deg, #0a2a43 0%, #0a385f 50%, #0077b5 100%);
+            background-attachment: fixed;
+        }
+        /* Glassmorphism base style */
+        .glass {
+            background: rgba(255, 255, 255, 0.05); /* Very subtle white */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); /* For Safari */
+            border-radius: 1rem; /* 16px */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-dark {
+             background: rgba(0, 0, 0, 0.4); /* Increased opacity from 0.2 to 0.4 */
+             backdrop-filter: blur(15px);
+             -webkit-backdrop-filter: blur(15px);
+             border-radius: 1rem;
+             border: 1px solid rgba(255, 255, 255, 0.1); /* Slightly more visible border */
+             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+             transition: all 0.3s ease;
+        }
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.15);
+        }
+        .glass-dark-hover:hover {
+             background: rgba(0, 0, 0, 0.3);
+             border: 1px solid rgba(255, 255, 255, 0.1);
+             transform: translateY(-3px);
+             box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.2);
+        }
+        /* Remove default gradient */
+        .gradient-bg {
+            background: transparent; /* Use body background */
+        }
+        .streak-fire {
+            animation: pulse 1.5s infinite;
+            color: #ffcc00; /* Brighter fire color */
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .ai-processing {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .ai-highlight {
+            background-color: rgba(0, 160, 220, 0.3); /* Use theme color highlight */
+            border-radius: 3px;
+            padding: 0 2px;
+            transition: background-color 0.3s;
+        }
+        /* Ensure text is readable */
+        body {
+            color: #e0e0e0; /* Light gray for default text */
+        }
+        h1, h2, h3, h4, h5, h6, .font-bold {
+            color: #ffffff; /* White for headings and bold text */
+        }
+        .text-gray-600 { color: #b0b0b0; } /* Lighter gray */
+        .text-gray-500 { color: #909090; } /* Lighter gray */
+        .text-gray-800 { color: #f0f0f0; } /* Lighter gray */
+        .text-blue-600 { color: #60a5fa; } /* Tailwind blue-400 */
+        .text-green-600 { color: #34d399; } /* Tailwind green-400 */
+        .text-purple-600 { color: #a78bfa; } /* Tailwind purple-400 */
+        .text-yellow-500 { color: #facc15; } /* Tailwind yellow-400 */
+        .text-red-500 { color: #f87171; } /* Tailwind red-400 */
+
+        /* Specific overrides for contrast on glass */
+        .glass .text-gray-800, .glass-dark .text-gray-800 { color: #f0f0f0; }
+        .glass .text-gray-600, .glass-dark .text-gray-600 { color: #c0c0c0; }
+        .glass .text-gray-500, .glass-dark .text-gray-500 { color: #a0a0a0; }
+        .glass .font-bold, .glass-dark .font-bold { color: #ffffff; }
+
+        /* Input/Select styles */
+        select, input[type="text"], input[type="checkbox"], textarea {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+        select option {
+            background: #0a385f; /* Match body background */
+            color: #e0e0e0;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.25rem;
+            position: relative;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        input[type="checkbox"]:checked {
+            background-color: rgba(0, 119, 181, 0.7);
+            border-color: rgba(0, 119, 181, 0.9);
+        }
+        input[type="checkbox"]:checked::after {
+            content: '✔';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+        }
+
+        /* Table styles */
+        table {
+            color: #e0e0e0;
+        }
+        th {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        td {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        /* Progress bar adjustments */
+        .bg-gray-200 { background-color: rgba(255, 255, 255, 0.1); }
+        .bg-blue-600 { background-color: #60a5fa; }
+        .bg-green-500 { background-color: #34d399; }
+        .bg-purple-500 { background-color: #a78bfa; }
+        .bg-yellow-500 { background-color: #facc15; }
+        .bg-red-500 { background-color: #f87171; }
+        .bg-orange-500 { background-color: #fb923c; } /* Tailwind orange-400 */
+
+        /* Badge adjustments */
+        .bg-green-100 { background-color: rgba(52, 211, 153, 0.1); }
+        .text-green-800 { color: #a7f3d0; } /* Lighter green */
+        .bg-blue-100 { background-color: rgba(96, 165, 250, 0.1); }
+        .text-blue-800 { color: #bfdbfe; } /* Lighter blue */
+        .bg-gray-100 { background-color: rgba(255, 255, 255, 0.05); }
+        .text-gray-800 { color: #e5e7eb; } /* Lighter gray */
+        .bg-yellow-100 { background-color: rgba(250, 204, 21, 0.1); }
+        .text-yellow-800 { color: #fde68a; } /* Lighter yellow */
+        .bg-purple-100 { background-color: rgba(167, 139, 250, 0.1); }
+        .text-purple-800 { color: #ddd6fe; } /* Lighter purple */
+
+        /* Added style for collapsed state */
+        .taylor-overlay-collapsed {
+            height: 4rem; /* Adjust as needed */
+            overflow: hidden;
+            padding: 0.5rem; /* Reduce padding */
+        }
+        .taylor-overlay-collapsed > div:not(:first-child) { /* Hide content except maybe the header/controls */
+            display: none;
+        }
+        .drag-handle {
+            cursor: move;
+        }
+
+        /* Make content background more visible */
+        .bg-black\/20 {
+            background-color: rgba(0, 0, 0, 0.35) !important; /* Darker background for content areas */
+        }
+        
+        /* Brighter text colors */
+        .text-gray-300 {
+            color: #e0e0e0 !important; /* Brighter than default */
+        }
+        
+        /* Increase contrast for content areas */
+        #jobDescriptionText, 
+        #documentPreview, 
+        .p-3.bg-black\/20 {
+            border: 1px solid rgba(255, 255, 255, 0.07); /* Subtle border */
+        }
+        
+        /* Make code more readable */
+        pre code {
+            color: #f0f0f0; /* Brighter code text */
+        }
+        /* Styles for privacy policy page content */
+        .privacy-content h1, .privacy-content h2 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .privacy-content p, .privacy-content ul {
+            margin-bottom: 1em;
+        }
+        .privacy-content ul {
+            list-style-type: disc;
+            margin-left: 2em;
+        }
+        .privacy-content strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white fixed top-0 left-0 right-0 z-50 glass">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2"> <!-- Link back to homepage -->
+                    <i class="fas fa-wand-magic-sparkles text-2xl"></i>
+                    <span class="text-xl font-bold">Taylor</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="hover:text-blue-300 transition">Features</a>
+                <a href="index.html#extension" class="hover:text-blue-300 transition">How it Works</a>
+                <a href="index.html#tracking" class="hover:text-blue-300 transition">Tracking</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                 <button class="bg-blue-500/80 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-500/100 transition border border-white/10 flex items-center">
+                   <a href="#" class="hover:text-blue-300 transition"> Coming Soon! (alpha testing)</a>
+                </button>
+                <!-- Mobile menu button can be added here if needed -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24"> <!-- Increased padding-top for fixed nav -->
+        <section class="text-white py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="glass p-6 md:p-10 privacy-content">
+                    <h1>Privacy Policy for Taylor Extension</h1>
+
+                    <p><strong>Effective Date:</strong> May 7, 2025</p>
+                    
+                    <h2>1. Introduction</h2>
+                    <p>Welcome to Taylor (the "Extension"). This Privacy Policy explains how we collect, store, use, and disclose information, particularly the resume data you provide when using our Extension. Your privacy is important to us, and we are committed to protecting it.</p>
+                    
+                    <h2>2. Information We Collect and How It's Stored</h2>
+                    <p>When you use our Extension to create and manage your resumes, the information you input, which may include your name, contact details, work experience, education, skills, and other professional information ("Resume Data"), is collected.</p>
+                    <p>This Resume Data is stored on secure servers managed by us, utilizing Google Cloud's Firebase services, specifically Firestore, as our backend database. We store your data to enable the core functionality of the Extension, such as allowing you to save, access, edit, and manage your resumes.</p>
+                    <p>As the developers of this Extension, we have the technical capability to access the Resume Data stored in the Firestore database.</p>
+                    
+                    <h2>3. How We Use Your Information</h2>
+                    <p>The primary purpose for collecting and storing your Resume Data is to provide you with the services offered by the Extension. This includes:</p>
+                    <ul>
+                        <li>Allowing you to create, store, view, edit, and manage your resumes.</li>
+                        <li>Enabling the functionality required for the Extension to operate as intended.</li>
+                    </ul>
+                    <p>Developer access to your Resume Data is strictly limited. We will only access your Resume Data if it is essential for:</p>
+                    <ul>
+                        <li>Providing technical support at your request.</li>
+                        <li>Troubleshooting issues with the Extension or its underlying services (e.g., Firestore).</li>
+                        <li>Maintaining and improving the service's integrity and security.</li>
+                        <li>Complying with legal obligations.</li>
+                    </ul>
+                    <p>We will not use the content of your resumes for any other purposes, such as marketing or analysis, without your explicit prior consent.</p>
+                    
+                    <h2>4. Data Sharing and Disclosure</h2>
+                    <p>We do not sell, rent, or trade your personal Resume Data to third parties for their marketing purposes.</p>
+                    <p>We may share your information in the following limited circumstances:</p>
+                    <ul>
+                        <li><strong>Service Providers:</strong> We use Google Cloud's Firebase services (including Firestore for database and Firebase Authentication) for data storage, user authentication, and hosting infrastructure. Google is responsible for the security of its cloud infrastructure and is bound by its own privacy policies and data protection terms.</li>
+                        <li><strong>Legal Requirements:</strong> We may disclose your Resume Data if required to do so by law or in the good faith belief that such action is necessary to comply with a legal obligation, protect and defend our rights or property, prevent fraud, act in urgent circumstances to protect the personal safety of users of the Extension, or protect against legal liability.</li>
+                    </ul>
+                    
+                    <h2>5. Data Security</h2>
+                    <p>We are committed to protecting the security of your Resume Data. We utilize Firebase services (Firestore and Firebase Authentication), which implement industry-standard security measures to protect data from loss, misuse, and unauthorized access or disclosure. These measures include data encryption in transit (e.g., using HTTPS) and at rest, and secure access controls provided by Google Cloud.</p>
+                    <p>While we and our service providers take reasonable precautions to protect your information, please be aware that no security system is impenetrable, and we cannot guarantee the absolute security of your data.</p>
+                    
+                    <h2>6. User Rights and Choices</h2>
+                    <p>You have control over your Resume Data within the Extension. You can:</p>
+                    <ul>
+                        <li><strong>Access and Review:</strong> Access and review your Resume Data at any time through the Extension's interface.</li>
+                        <li><strong>Edit and Update:</strong> Modify or update your Resume Data as needed through the Extension's interface.</li>
+                        <li><strong>Delete:</strong> Delete your Resume Data through the Extension's interface. Deleting your resume data via the extension will remove it from our active Firestore database.</li>
+                    </ul>
+                    <p>If you wish to delete your account and all associated Resume Data from our servers, please contact us at valluruchetanreddy@gmail.com or use any 'Delete Account' feature if made available within the Extension's settings. Upon request for account deletion, your data will be processed for deletion as outlined in the Data Retention section.</p>
+                    
+                    <h2>7. Data Retention</h2>
+                    <p>We will retain your Resume Data as long as your account is active or as needed to provide you with the Extension's services.</p>
+                    <p>If you delete your account or request deletion of your data, we will take steps to delete your Resume Data from our active databases within 30 days, unless we are legally required to retain it for a longer period (for example, to comply with legal, tax, or accounting requirements). Anonymized or aggregated data, which does not identify you personally, may be retained for analytical purposes.</p>
+                    
+                    <h2>8. Children's Privacy</h2>
+                    <p>Our Extension is not directed to individuals under the age of 13 (or the relevant age of consent in your jurisdiction). We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal information, we will take steps to delete such information. If you believe that a child has provided us with personal information, please contact us at valluruchetanreddy@gmail.com.</p>
+                    
+                    <h2>9. Changes to This Privacy Policy</h2>
+                    <p>We may update this Privacy Policy from time to time. If we make material changes, we will notify you by updating the "Effective Date" at the top of this policy and by posting a notice on the Extension's Chrome Web Store listing or within the Extension itself. We encourage you to review this Privacy Policy periodically for any changes.</p>
+                    
+                    <h2>10. Contact Information</h2>
+                    <p>If you have any questions, concerns, or comments about this Privacy Policy or our data practices, please contact us at:<br>
+                    valluruchetanreddy@gmail.com</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-dark text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Taylor</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="index.html#extension" class="text-gray-400 hover:text-white transition">How it Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Chrome Extension</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Updates</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="privacy_policy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Connect</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p class="text-gray-400">valluruchetanreddy@gmail.com</p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 text-center text-gray-400">
+                <p>© 2025 Taylor AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
