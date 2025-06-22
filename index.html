@@ -7,27 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base gradient background for the body */
+        /* Vanta.js will control the background. This ensures text readability. */
         body {
-            background: linear-gradient(135deg, #0a2a43 0%, #0a385f 50%, #0077b5 100%);
-            background-attachment: fixed;
+            color: #e0e0e0; /* Light gray for default text */
         }
         /* Glassmorphism base style */
         .glass {
-            background: rgba(255, 255, 255, 0.05); /* Very subtle white */
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); /* For Safari */
-            border-radius: 1rem; /* 16px */
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
         .glass-dark {
-             background: rgba(0, 0, 0, 0.4); /* Increased opacity from 0.2 to 0.4 */
+             background: rgba(0, 0, 0, 0.4);
              backdrop-filter: blur(15px);
              -webkit-backdrop-filter: blur(15px);
              border-radius: 1rem;
-             border: 1px solid rgba(255, 255, 255, 0.1); /* Slightly more visible border */
+             border: 1px solid rgba(255, 255, 255, 0.1);
              box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
              transition: all 0.3s ease;
         }
@@ -37,19 +36,9 @@
             transform: translateY(-3px);
             box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.15);
         }
-        .glass-dark-hover:hover {
-             background: rgba(0, 0, 0, 0.3);
-             border: 1px solid rgba(255, 255, 255, 0.1);
-             transform: translateY(-3px);
-             box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.2);
-        }
-        /* Remove default gradient */
-        .gradient-bg {
-            background: transparent; /* Use body background */
-        }
         .streak-fire {
             animation: pulse 1.5s infinite;
-            color: #ffcc00; /* Brighter fire color */
+            color: #ffcc00;
         }
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.8; }
@@ -61,547 +50,455 @@
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
-        .ai-processing {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .ai-highlight {
-            background-color: rgba(0, 160, 220, 0.3); /* Use theme color highlight */
-            border-radius: 3px;
-            padding: 0 2px;
-            transition: background-color 0.3s;
-        }
         /* Ensure text is readable */
-        body {
-            color: #e0e0e0; /* Light gray for default text */
-        }
         h1, h2, h3, h4, h5, h6, .font-bold {
-            color: #ffffff; /* White for headings and bold text */
+            color: #ffffff;
         }
-        .text-gray-600 { color: #b0b0b0; } /* Lighter gray */
-        .text-gray-500 { color: #909090; } /* Lighter gray */
-        .text-gray-800 { color: #f0f0f0; } /* Lighter gray */
-        .text-blue-600 { color: #60a5fa; } /* Tailwind blue-400 */
-        .text-green-600 { color: #34d399; } /* Tailwind green-400 */
-        .text-purple-600 { color: #a78bfa; } /* Tailwind purple-400 */
-        .text-yellow-500 { color: #facc15; } /* Tailwind yellow-400 */
-        .text-red-500 { color: #f87171; } /* Tailwind red-400 */
-
-        /* Specific overrides for contrast on glass */
-        .glass .text-gray-800, .glass-dark .text-gray-800 { color: #f0f0f0; }
-        .glass .text-gray-600, .glass-dark .text-gray-600 { color: #c0c0c0; }
-        .glass .text-gray-500, .glass-dark .text-gray-500 { color: #a0a0a0; }
-        .glass .font-bold, .glass-dark .font-bold { color: #ffffff; }
+        .text-gray-300 { color: #e0e0e0 !important; }
+        .text-gray-400 { color: #b0b0b0 !important; }
+        .text-gray-500 { color: #909090 !important; }
+        .text-blue-600 { color: #60a5fa; }
+        .text-green-400 { color: #34d399; }
+        .text-purple-400 { color: #a78bfa; }
+        .text-yellow-400 { color: #facc15; }
+        .text-blue-100 { color: #bfdbfe; }
+        .hover\:text-blue-300:hover { color: #93c5fd; }
 
         /* Input/Select styles */
-        select, input[type="text"], input[type="checkbox"], textarea {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
+        select, input[type="text"], input[type="checkbox"], textarea, .bg-black\/20 {
+            background: rgba(0, 0, 0, 0.35) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #e0e0e0 !important;
         }
         select option {
-            background: #0a385f; /* Match body background */
+            background: #0a385f;
             color: #e0e0e0;
         }
-        input[type="checkbox"] {
-            appearance: none;
-            width: 1.25rem;
-            height: 1.25rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.25rem;
-            position: relative;
-            cursor: pointer;
-            margin-right: 0.5rem;
-            vertical-align: middle;
-        }
-        input[type="checkbox"]:checked {
-            background-color: rgba(0, 119, 181, 0.7);
-            border-color: rgba(0, 119, 181, 0.9);
-        }
-        input[type="checkbox"]:checked::after {
-            content: '✔';
-            color: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.8rem;
-        }
-
-        /* Table styles */
-        table {
-            color: #e0e0e0;
-        }
-        th {
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        td {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-        }
-        /* Progress bar adjustments */
-        .bg-gray-200 { background-color: rgba(255, 255, 255, 0.1); }
-        .bg-blue-600 { background-color: #60a5fa; }
-        .bg-green-500 { background-color: #34d399; }
-        .bg-purple-500 { background-color: #a78bfa; }
-        .bg-yellow-500 { background-color: #facc15; }
-        .bg-red-500 { background-color: #f87171; }
-        .bg-orange-500 { background-color: #fb923c; } /* Tailwind orange-400 */
-
-        /* Badge adjustments */
-        .bg-green-100 { background-color: rgba(52, 211, 153, 0.1); }
-        .text-green-800 { color: #a7f3d0; } /* Lighter green */
-        .bg-blue-100 { background-color: rgba(96, 165, 250, 0.1); }
-        .text-blue-800 { color: #bfdbfe; } /* Lighter blue */
-        .bg-gray-100 { background-color: rgba(255, 255, 255, 0.05); }
-        .text-gray-800 { color: #e5e7eb; } /* Lighter gray */
-        .bg-yellow-100 { background-color: rgba(250, 204, 21, 0.1); }
-        .text-yellow-800 { color: #fde68a; } /* Lighter yellow */
-        .bg-purple-100 { background-color: rgba(167, 139, 250, 0.1); }
-        .text-purple-800 { color: #ddd6fe; } /* Lighter purple */
-
-        /* Added style for collapsed state */
-        .taylor-overlay-collapsed {
-            height: 4rem; /* Adjust as needed */
-            overflow: hidden;
-            padding: 0.5rem; /* Reduce padding */
-        }
-        .taylor-overlay-collapsed > div:not(:first-child) { /* Hide content except maybe the header/controls */
-            display: none;
-        }
-        .drag-handle {
-            cursor: move;
-        }
-
-        /* Make content background more visible */
-        .bg-black\/20 {
-            background-color: rgba(0, 0, 0, 0.35) !important; /* Darker background for content areas */
-        }
         
-        /* Brighter text colors */
-        .text-gray-300 {
-            color: #e0e0e0 !important; /* Brighter than default */
-        }
-        
-        /* Increase contrast for content areas */
-        #jobDescriptionText, 
-        #documentPreview, 
-        .p-3.bg-black\/20 {
-            border: 1px solid rgba(255, 255, 255, 0.07); /* Subtle border */
-        }
-        
-        /* Make code more readable */
-        pre code {
-            color: #f0f0f0; /* Brighter code text */
-        }
+        /* Color Overrides for consistency */
+        .bg-purple-500 { background-color: #a78bfa !important; }
+        .bg-purple-500\/80 { background-color: rgba(167, 139, 250, 0.8) !important; }
+        .hover\:bg-purple-500\/100:hover { background-color: rgba(167, 139, 250, 1) !important; }
+        .bg-blue-500\/80 { background-color: rgba(96, 165, 250, 0.8) !important; }
+        .hover\:bg-blue-500\/100:hover { background-color: rgba(96, 165, 250, 1) !important; }
+        .bg-white\/5 { background-color: rgba(255,255,255,0.05) !important; }
+        .border-white\/10 { border-color: rgba(255,255,255,0.1) !important; }
+        .bg-blue-500\/20 { background-color: rgba(96, 165, 250, 0.2) !important; }
+        .border-blue-500\/30 { border-color: rgba(96, 165, 250, 0.3) !important; }
+        .bg-purple-500\/20 { background-color: rgba(167, 139, 250, 0.2) !important; }
+        .border-purple-500\/30 { border-color: rgba(167, 139, 250, 0.3) !important; }
+        .bg-green-500\/20 { background-color: rgba(52, 211, 153, 0.2) !important; }
+        .border-green-500\/30 { border-color: rgba(52, 211, 153, 0.3) !important; }
+        .bg-green-500\/80 { background-color: rgba(52, 211, 153, 0.8) !important; }
+        .hover\:bg-green-500\/100:hover { background-color: rgba(52, 211, 153, 1) !important; }
     </style>
 </head>
 <body class="font-sans">
-    <!-- Navigation -->
-    <nav class="gradient-bg text-white fixed top-0 left-0 right-0 z-50 glass">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-wand-magic-sparkles text-2xl"></i>
-                <span class="text-xl font-bold">Taylor</span>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#features" class="hover:text-blue-300 transition">Features</a>
-                <a href="#extension" class="hover:text-blue-300 transition">How it Works</a>
-                <a href="#tracking" class="hover:text-blue-300 transition">Tracking</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-blue-500/80 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-500/100 transition border border-white/10 flex items-center">
-                   Add to Chrome
-                </a>
-                <button class="md:hidden text-white">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <!-- Vanta.js Background -->
+    <div id="vanta-bg" class="fixed top-0 left-0 w-full h-full z-0"></div>
 
-    <div class="pt-16">
-        <!-- Hero Section -->
-        <section class="text-white py-24 md:py-32">
-            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Resume, Reimagined.<br> Custom Fit. Every Time.</h1>
-                    <p class="text-xl text-gray-300 mb-8">Because one-size doesn’t get hired. Taylor crafts AI-personalized resumes and cover letters directly on job sites.</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
-                        <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold transition duration-300 flex items-center justify-center hover:bg-opacity-90 hover:shadow-[0_4px_15px_rgba(255,255,255,0.2)] hover:-translate-y-0.5 hover:text-blue-300">
-                            Add Taylor to Chrome
-                        </a>
-                    </div>
+    <!-- Content Wrapper -->
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="text-white fixed top-0 left-0 right-0 z-50 glass">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-wand-magic-sparkles text-2xl"></i>
+                    <span class="text-xl font-bold">Taylor</span>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative glass p-2 w-full max-w-md">
-                         <div class="absolute -top-3 -left-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center drag-handle">
-                            <i class="fas fa-wand-magic-sparkles mr-1"></i> Taylor Overlay
-                        </div>
-                         <div class="absolute top-2 right-2 flex space-x-1">
-                             <button class="text-gray-400 hover:text-white text-xs"><i class="fas fa-window-minimize"></i></button>
-                             <button class="text-gray-400 hover:text-white text-xs"><i class="fas fa-times"></i></button>
-                         </div>
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <div class="flex justify-between items-center mb-4">
-                                <div>
-                                    <h3 class="font-bold text-white">Job Scraper</h3>
-                                    <p class="text-sm text-gray-400 flex items-center"><i class="fas fa-check-circle text-green-400 mr-1"></i> Ready</p>
-                                </div>
-                                <button class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-sync-alt mr-1"></i> Rescrape</button>
-                            </div>
-
-                            <div class="mb-4">
-                                <h3 class="font-bold text-white mb-2">AI Generation</h3>
-                                <button class="w-full bg-purple-500/80 text-white py-2 rounded-lg font-bold mb-2 hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
-                                    <i class="fas fa-magic mr-2"></i> Generate Resume
-                                </button>
-                                <button class="w-full bg-purple-500/80 text-white py-2 rounded-lg font-bold hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
-                                    <i class="fas fa-envelope-open-text mr-2"></i> Generate Cover Letter
-                                </button>
-                            </div>
-
-                             <div class="flex justify-between items-center">
-                                <div class="text-center">
-                                    <div class="text-lg font-bold text-blue-400">3</div>
-                                    <div class="text-xs text-gray-400">Applied Today</div>
-                                </div>
-                                <div class="text-center">
-                                    <span class="streak-fire mr-1 text-lg">🔥</span>
-                                    <span class="font-bold text-white text-sm">7 day streak</span>
-                                </div>
-                                <button class="text-gray-300 font-medium flex items-center hover:text-white text-sm">
-                                    <i class="fas fa-chart-line mr-1"></i> View Stats
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#features" class="hover:text-blue-300 transition">Features</a>
+                    <a href="#extension" class="hover:text-blue-300 transition">How it Works</a>
+                    <a href="#tracking" class="hover:text-blue-300 transition">Tracking</a>
                 </div>
-            </div>
-        </section>
-
-     <!-- Features Section -->
-<section id="features" class="py-16">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 text-white">Streamline Your Application Process</h2>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass glass-hover p-6">
-                <div class="bg-blue-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-blue-500/30">
-                    <i class="fas fa-search-location text-blue-100 text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-white">Automated Job Scraping</h3>
-                <p class="text-gray-300">Instantly captures job titles and descriptions on page load. Manual rescrape option for tricky sites.</p>
-            </div>
-            
-            <div class="glass glass-hover p-6">
-                <div class="bg-blue-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-blue-500/30">
-                    <i class="fas fa-fire text-blue-400 text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-white">Streak Tracking</h3>
-                <p class="text-gray-300">Maintain motivation with daily application streaks and visual progress indicators to keep you accountable.</p>
-            </div>
-            
-            <div class="glass glass-hover p-6">
-                <div class="bg-purple-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-purple-500/30">
-                    <i class="fas fa-robot text-purple-400 text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-white">AI-Tailored Documents</h3>
-                <p class="text-gray-300">Generates customized resumes & cover letters using scraped data and your resume JSON. Zero hallucination.</p>
-            </div>
-
-            <div class="glass glass-hover p-6">
-                <div class="bg-green-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-green-500/30">
-                    <i class="fas fa-edit text-green-400 text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-white">Interactive Preview & Edit</h3>
-                <p class="text-gray-300">Review, edit, and finalize AI-generated documents directly in the overlay before exporting to PDF.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-        <!-- Extension Demo Section -->
-        <section id="extension" class="py-16">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0">
-                        <h2 class="text-3xl font-bold mb-4 text-white">Taylor in Action</h2>
-                        <p class="text-gray-300 mb-6">See how Taylor injects a smart, interactive overlay onto job listing pages, transforming your application workflow.</p>
-
-                        <ul class="space-y-3 mb-8 text-gray-200">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Instant job description scraping</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>One-click AI resume/cover letter generation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>In-browser document preview and editing</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Easy PDF export for submissions</span>
-                            </li>
-                             <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Built-in application streak tracking</span>
-                            </li>
-                        </ul>
-
-                        <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="flex items-center px-6 py-3 rounded-full font-bold transition duration-300 hover:text-blue-300" style="background: rgba(0, 119, 181, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);" onmouseover="this.style.background='rgba(0, 119, 181, 0.9)'; this.style.boxShadow='0 4px 15px rgba(0, 119, 181, 0.3)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='rgba(0, 119, 181, 0.7)'; this.style.boxShadow='none'; this.style.transform='translateY(0)';">
-                            Add to Chrome - It's Free!
-                        </a>
-                    </div>
-
-                    <div class="md:w-1/2 flex justify-center">
-                        <div class="relative max-w-md">
-                            <img src="https://via.placeholder.com/400x600/0a385f/ffffff?text=Taylor+Overlay+Screenshot" alt="Taylor Extension Overlay" class="rounded-xl shadow-xl border-8 border-white/10 glass">
-                            <div class="absolute -bottom-6 -right-6 glass p-4 rounded-xl shadow-lg">
-                                <div class="flex items-center">
-                                    <div class="bg-purple-500/20 p-2 rounded-full mr-3 border border-purple-500/30">
-                                        <i class="fas fa-file-pdf text-purple-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold text-white">PDF Ready</div>
-                                        <div class="text-sm text-gray-300">Resume tailored & exported</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Resume Generator Section -->
-        <section class="py-16">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-4 text-white">AI-Powered Document Generation</h2>
-                <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">Taylor uses the scraped job description and your base resume JSON to create perfectly tailored documents without hallucination.</p>
-
-                <div class="glass p-6">
-                    <div class="flex flex-col lg:flex-row">
-                        <div class="lg:w-1/2 mb-6 lg:mb-0 lg:mr-6">
-                            <div class="glass-dark p-4 shadow mb-4">
-                                <h3 class="font-bold mb-3 text-white flex justify-between items-center">
-                                    <span>Scraped Job Description</span>
-                                    <button id="scrapeJobBtnInline" class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-sync-alt mr-1"></i> Rescrape</button>
-                                </h3>
-                                <div class="p-3 bg-black/20 rounded h-48 overflow-y-auto text-gray-300" id="jobDescriptionText">
-                                    <p><i>Automatically scraped from the job page...</i></p>
-                                    <p><strong>Senior Frontend Developer</strong></p>
-                                    <p><strong>Location:</strong> San Francisco, CA</p>
-                                    <p><strong>Company:</strong> Tech Innovations Inc.</p>
-                                    <p><strong>Requirements:</strong> 5+ years experience with React.js and TypeScript...</p>
-                                </div>
-                            </div>
-                             <div class="glass-dark p-4 shadow">
-                                <h3 class="font-bold mb-3 text-white flex justify-between items-center">
-                                    <span>Base Resume (resume.json)</span>
-                                     <button class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-upload mr-1"></i> Upload/Edit</button>
-                                </h3>
-                                <div class="p-3 bg-black/20 rounded h-32 overflow-y-auto text-gray-300 text-sm">
-                                    <pre><code>{
-  "name": "Your Name",
-  "contact": { ... },
-  "summary": "Experienced...",
-  "experience": [ ... ],
-  "skills": [ ... ]
-}</code></pre>
-                                    <p class="text-xs text-gray-500 mt-1">Taylor uses this structured data.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:w-1/2">
-                            <div class="glass-dark p-4 shadow mb-4">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="font-bold text-white">AI Generation Controls</h3>
-                                    <span id="aiStatus" class="text-xs text-gray-400">Status: Idle</span>
-                                </div>
-                                <div class="flex space-x-2 mb-3">
-                                     <button id="generateResumeBtnInline" class="flex-1 bg-purple-500/80 text-white px-4 py-2 rounded font-medium hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
-                                        <i class="fas fa-magic mr-2"></i> Generate Resume
-                                    </button>
-                                     <button id="generateCoverLetterBtnInline" class="flex-1 bg-purple-500/80 text-white px-4 py-2 rounded font-medium hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
-                                        <i class="fas fa-envelope-open-text mr-2"></i> Cover Letter
-                                    </button>
-                                </div>
-                                <div id="aiAlerts" class="text-sm text-center p-1 rounded"></div>
-                            </div>
-
-                            <div class="glass-dark p-4 shadow">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="font-bold text-white">Preview & Edit</h3>
-                                    <button id="downloadPdfBtn" class="bg-green-500/80 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-500/100 transition flex items-center border border-white/10" disabled>
-                                        <i class="fas fa-download mr-1"></i> Export PDF
-                                    </button>
-                                </div>
-                                <div class="p-3 bg-black/20 rounded h-48 overflow-y-auto" id="documentPreview">
-                                    <p class="text-gray-400 text-center mt-16">Generated document preview appears here...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard Preview Section -->
-        <section id="tracking" class="py-16">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-4 text-white">Track Your Application Progress</h2>
-                <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">Monitor your application consistency with the built-in streak tracker and daily counter. Data persists across sessions.</p>
-
-                <div class="glass p-6 max-w-4xl mx-auto">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <div class="glass-dark p-4 shadow mb-4">
-                                <h3 class="font-bold mb-3 text-white">Application Stats</h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium text-gray-300">Today</span>
-                                            <span class="text-sm font-bold text-white">3</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium text-gray-300">This Week</span>
-                                            <span class="text-sm font-bold text-white">24</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium text-gray-300">Total Tracked</span>
-                                            <span class="text-sm font-bold text-white">89</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="md:w-1/3 flex items-center justify-center">
-                             <div class="glass-dark p-4 shadow text-center">
-                                <h3 class="font-bold mb-3 text-white">Current Streak</h3>
-                                <div class="flex items-center justify-center">
-                                    <div class="relative w-24 h-24">
-                                        <svg class="w-full h-full" viewBox="0 0 100 100">
-                                            <circle class="text-white/10" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
-                                            <circle class="text-yellow-400 progress-ring__circle" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="50.24" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
-                                        </svg>
-                                        <div class="absolute inset-0 flex items-center justify-center flex-col">
-                                            <span class="text-2xl font-bold text-white">7</span>
-                                            <span class="text-xs text-gray-300">days</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2">
-                                    <span class="streak-fire text-lg">🔥</span>
-                                    <span class="font-medium text-gray-300">Keep the momentum!</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="md:w-1/3">
-                             <div class="glass-dark p-4 shadow h-full flex flex-col justify-center">
-                                <h3 class="font-bold mb-3 text-white">Stay Consistent</h3>
-                                <p class="text-gray-300 text-sm mb-2">Applying consistently is key. Taylor helps you build that habit.</p>
-                                <p class="text-gray-300 text-sm">Aim for a few tailored applications each day.</p>
-                                <button class="mt-4 text-blue-100 text-sm font-medium hover:text-blue-300 w-full text-left">View Full History (Coming Soon)</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-16 text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-4">Stop Sending Generic Resumes, Get Taylor Now - It's Free!</h2>
-                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Let Taylor, your AI Career Stylist, craft custom-fit applications that get noticed.</p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold transition duration-300 hover:bg-opacity-90 hover:shadow-[0_4px_15px_rgba(255,255,255,0.2)] hover:-translate-y-0.5 hover:text-blue-300">
-                        Install Free Extension
+                <div class="flex items-center space-x-4">
+                    <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-blue-500/80 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-500/100 transition border border-white/10 flex items-center">
+                       Add to Chrome
                     </a>
-                    <button class="bg-transparent border-2 border-white px-8 py-4 rounded-full text-lg font-bold transition duration-300 hover:bg-white/10 hover:-translate-y-0.5">
-                        How Taylor Works
+                    <button class="md:hidden text-white">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
-        </section>
-        <!-- Student Developer Section -->
-        <section class="py-12 text-white">
-            <div class="container mx-auto px-4">
-                <div class="glass p-8 max-w-3xl mx-auto text-center">
-                    <h2 class="text-2xl font-bold mb-4">About the Developer</h2>
-                    <p class="text-gray-300 mb-6">Taylor is created by an individual student developer passionate about making the job search process easier. Your support and feedback are greatly appreciated as I continue to improve this tool.</p>
-                    
-                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" target="_blank" class="bg-blue-600/80 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-600/100 transition flex items-center justify-center">
-                            <i class="fab fa-linkedin mr-2"></i> Connect on LinkedIn
-                        </a>
-                        <a href="mailto:valluruchetanreddy@gmail.com" class="bg-transparent border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition flex items-center justify-center">
-                            <i class="fas fa-envelope mr-2"></i> Get in Touch
-                        </a>
-                    </div>
-                    
-                    <p class="text-gray-400 text-sm mt-6">If you find Taylor helpful, sharing with fellow job-seekers is the best way to show support!</p>
-                </div>
-            </div>
-        </section>
-        <!-- Footer -->
-        <footer class="glass-dark text-white py-12 mt-16">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                    <div>
-                        <h3 class="font-bold mb-4 text-white">Taylor</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
-                            <li><a href="#extension" class="text-gray-400 hover:text-white transition">How it Works</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Chrome Extension</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Updates</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-4 text-white">Resources</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Guides</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-4 text-white">Legal</h3>
-                        <ul class="space-y-2">
-                            <li><a href="privacy_policy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-4 text-white">Connect</h3>
-                        <div class="flex space-x-4 mb-4">
-                            <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+        </nav>
+
+        <div class="pt-16">
+            <!-- Hero Section -->
+            <section class="text-white py-24 md:py-32">
+                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Resume, Reimagined.<br> Custom Fit. Every Time.</h1>
+                        <p class="text-xl text-gray-300 mb-8">Because one-size doesn’t get hired. Taylor crafts AI-personalized resumes and cover letters directly on job sites.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                            <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold transition duration-300 flex items-center justify-center hover:bg-opacity-90 hover:shadow-[0_4px_15px_rgba(255,255,255,0.2)] hover:-translate-y-0.5 hover:text-blue-300">
+                                Add Taylor to Chrome
+                            </a>
                         </div>
-                        <p class="text-gray-400">valluruchetanreddy@gmail.com</p>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative glass p-2 w-full max-w-md">
+                             <div class="absolute -top-3 -left-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center drag-handle">
+                                <i class="fas fa-hat-chef mr-1"></i> Taylor's AI Kitchen
+                            </div>
+                             <div class="absolute top-2 right-2 flex space-x-1">
+                                 <button class="text-gray-400 hover:text-white text-xs"><i class="fas fa-window-minimize"></i></button>
+                                 <button class="text-gray-400 hover:text-white text-xs"><i class="fas fa-times"></i></button>
+                             </div>
+                            <div class="bg-white/5 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div>
+                                        <h3 class="font-bold text-white">Recipe Scraper</h3>
+                                        <p class="text-sm text-gray-400 flex items-center"><i class="fas fa-carrot text-green-400 mr-1"></i> Ingredients gathered</p>
+                                    </div>
+                                    <button class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-sync-alt mr-1"></i> Get Fresh Ingredients</button>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h3 class="font-bold text-white mb-2">The Kitchen</h3>
+                                    <button class="w-full bg-purple-500/80 text-white py-2 rounded-lg font-bold mb-2 hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
+                                        <i class="fas fa-utensils mr-2"></i> Cook up Resume
+                                    </button>
+                                    <button class="w-full bg-purple-500/80 text-white py-2 rounded-lg font-bold hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
+                                        <i class="fas fa-bread-slice mr-2"></i> Bake Cover Letter
+                                    </button>
+                                </div>
+
+                                 <div class="flex justify-between items-center">
+                                    <div class="text-center">
+                                        <div class="text-lg font-bold text-blue-400">3</div>
+                                        <div class="text-xs text-gray-400">Served Today</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <span class="streak-fire mr-1 text-lg">🔥</span>
+                                        <span class="font-bold text-white text-sm">7 day cooking streak</span>
+                                    </div>
+                                    <button class="text-gray-300 font-medium flex items-center hover:text-white text-sm">
+                                        <i class="fas fa-book-open mr-1"></i> View Menu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="pt-8 border-t border-white/10 text-center text-gray-400">
-                    <p>© 2025 Taylor AI. All rights reserved.</p>
+            </section>
+
+         <!-- Features Section -->
+        <section id="features" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-white">Streamline Your Application Process</h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass glass-hover p-6">
+                        <div class="bg-blue-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-blue-500/30">
+                            <i class="fas fa-search-location text-blue-100 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Automated Job Scraping</h3>
+                        <p class="text-gray-300">Instantly captures job titles and descriptions on page load. Manual rescrape option for tricky sites.</p>
+                    </div>
+                    
+                    <div class="glass glass-hover p-6">
+                        <div class="bg-blue-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-blue-500/30">
+                            <i class="fas fa-fire text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Streak Tracking</h3>
+                        <p class="text-gray-300">Maintain motivation with daily application streaks and visual progress indicators to keep you accountable.</p>
+                    </div>
+                    
+                    <div class="glass glass-hover p-6">
+                        <div class="bg-purple-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-purple-500/30">
+                            <i class="fas fa-robot text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">AI-Tailored Documents</h3>
+                        <p class="text-gray-300">Generates customized resumes & cover letters using scraped data and your resume JSON. Zero hallucination.</p>
+                    </div>
+
+                    <div class="glass glass-hover p-6">
+                        <div class="bg-green-500/20 w-12 h-12 rounded-full flex items-center justify-center mb-4 border border-green-500/30">
+                            <i class="fas fa-edit text-green-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Interactive Preview & Edit</h3>
+                        <p class="text-gray-300">Review, edit, and finalize AI-generated documents directly in the overlay before exporting to PDF.</p>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </section>
+
+            <!-- Extension Demo Section -->
+            <section id="extension" class="py-16">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-10 md:mb-0">
+                            <h2 class="text-3xl font-bold mb-4 text-white">Taylor in Action</h2>
+                            <p class="text-gray-300 mb-6">See how Taylor injects a smart, interactive overlay onto job listing pages, transforming your application workflow.</p>
+
+                            <ul class="space-y-3 mb-8 text-gray-200">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                    <span>Instant job description scraping</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                    <span>One-click AI resume/cover letter generation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                    <span>In-browser document preview and editing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                    <span>Easy PDF export for submissions</span>
+                                </li>
+                                 <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                    <span>Built-in application streak tracking</span>
+                                </li>
+                            </ul>
+
+                            <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="flex items-center px-6 py-3 rounded-full font-bold transition duration-300 hover:text-blue-300" style="background: rgba(0, 119, 181, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);" onmouseover="this.style.background='rgba(0, 119, 181, 0.9)'; this.style.boxShadow='0 4px 15px rgba(0, 119, 181, 0.3)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='rgba(0, 119, 181, 0.7)'; this.style.boxShadow='none'; this.style.transform='translateY(0)';">
+                                Add to Chrome - It's Free!
+                            </a>
+                        </div>
+
+                        <div class="md:w-1/2 flex justify-center">
+                            <div class="relative max-w-md">
+                                <img src="https://via.placeholder.com/400x600/0a385f/ffffff?text=Taylor+Overlay+Screenshot" alt="Taylor Extension Overlay" class="rounded-xl shadow-xl border-8 border-white/10 glass">
+                                <div class="absolute -bottom-6 -right-6 glass p-4 rounded-xl shadow-lg">
+                                    <div class="flex items-center">
+                                        <div class="bg-purple-500/20 p-2 rounded-full mr-3 border border-purple-500/30">
+                                            <i class="fas fa-file-pdf text-purple-400"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white">PDF Ready</div>
+                                            <div class="text-sm text-gray-300">Resume tailored & exported</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Resume Generator Section -->
+            <section class="py-16">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-4 text-white">AI-Powered Document Generation</h2>
+                    <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">Taylor uses the scraped job description and your base resume JSON to create perfectly tailored documents without hallucination.</p>
+
+                    <div class="glass p-6">
+                        <div class="flex flex-col lg:flex-row">
+                            <div class="lg:w-1/2 mb-6 lg:mb-0 lg:mr-6">
+                                <div class="glass-dark p-4 shadow mb-4">
+                                    <h3 class="font-bold mb-3 text-white flex justify-between items-center">
+                                        <span>Scraped Job Description</span>
+                                        <button id="scrapeJobBtnInline" class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-sync-alt mr-1"></i> Rescrape</button>
+                                    </h3>
+                                    <div class="p-3 bg-black/20 rounded h-48 overflow-y-auto text-gray-300" id="jobDescriptionText">
+                                        <p><i>Automatically scraped from the job page...</i></p>
+                                        <p><strong>Senior Frontend Developer</strong></p>
+                                        <p><strong>Location:</strong> San Francisco, CA</p>
+                                        <p><strong>Company:</strong> Tech Innovations Inc.</p>
+                                        <p><strong>Requirements:</strong> 5+ years experience with React.js and TypeScript...</p>
+                                    </div>
+                                </div>
+                                 <div class="glass-dark p-4 shadow">
+                                    <h3 class="font-bold mb-3 text-white flex justify-between items-center">
+                                        <span>Base Resume (resume.json)</span>
+                                         <button class="text-blue-100 text-sm hover:text-blue-300 flex items-center"><i class="fas fa-upload mr-1"></i> Upload/Edit</button>
+                                    </h3>
+                                    <div class="p-3 bg-black/20 rounded h-32 overflow-y-auto text-gray-300 text-sm">
+                                        <pre><code>{
+      "name": "Your Name",
+      "contact": { ... },
+      "summary": "Experienced...",
+      "experience": [ ... ],
+      "skills": [ ... ]
+    }</code></pre>
+                                        <p class="text-xs text-gray-500 mt-1">Taylor uses this structured data.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:w-1/2">
+                                <div class="glass-dark p-4 shadow mb-4">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <h3 class="font-bold text-white">AI Generation Controls</h3>
+                                        <span id="aiStatus" class="text-xs text-gray-400">Status: Idle</span>
+                                    </div>
+                                    <div class="flex space-x-2 mb-3">
+                                         <button id="generateResumeBtnInline" class="flex-1 bg-purple-500/80 text-white px-4 py-2 rounded font-medium hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
+                                            <i class="fas fa-magic mr-2"></i> Generate Resume
+                                        </button>
+                                         <button id="generateCoverLetterBtnInline" class="flex-1 bg-purple-500/80 text-white px-4 py-2 rounded font-medium hover:bg-purple-500/100 transition flex items-center justify-center border border-white/10">
+                                            <i class="fas fa-envelope-open-text mr-2"></i> Cover Letter
+                                        </button>
+                                    </div>
+                                    <div id="aiAlerts" class="text-sm text-center p-1 rounded"></div>
+                                </div>
+
+                                <div class="glass-dark p-4 shadow">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <h3 class="font-bold text-white">Preview & Edit</h3>
+                                        <button id="downloadPdfBtn" class="bg-green-500/80 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-500/100 transition flex items-center border border-white/10" disabled>
+                                            <i class="fas fa-download mr-1"></i> Export PDF
+                                        </button>
+                                    </div>
+                                    <div class="p-3 bg-black/20 rounded h-48 overflow-y-auto" id="documentPreview">
+                                        <p class="text-gray-400 text-center mt-16">Generated document preview appears here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Preview Section -->
+            <section id="tracking" class="py-16">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-4 text-white">Track Your Application Progress</h2>
+                    <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">Monitor your application consistency with the built-in streak tracker and daily counter. Data persists across sessions.</p>
+
+                    <div class="glass p-6 max-w-4xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="md:w-1/3">
+                                <div class="glass-dark p-4 shadow mb-4">
+                                    <h3 class="font-bold mb-3 text-white">Application Stats</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between mb-1">
+                                                <span class="text-sm font-medium text-gray-300">Today</span>
+                                                <span class="text-sm font-bold text-white">3</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between mb-1">
+                                                <span class="text-sm font-medium text-gray-300">This Week</span>
+                                                <span class="text-sm font-bold text-white">24</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between mb-1">
+                                                <span class="text-sm font-medium text-gray-300">Total Tracked</span>
+                                                <span class="text-sm font-bold text-white">89</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:w-1/3 flex items-center justify-center">
+                                 <div class="glass-dark p-4 shadow text-center">
+                                    <h3 class="font-bold mb-3 text-white">Current Streak</h3>
+                                    <div class="flex items-center justify-center">
+                                        <div class="relative w-24 h-24">
+                                            <svg class="w-full h-full" viewBox="0 0 100 100">
+                                                <circle class="text-white/10" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                                                <circle class="text-yellow-400 progress-ring__circle" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="50.24" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                                            </svg>
+                                            <div class="absolute inset-0 flex items-center justify-center flex-col">
+                                                <span class="text-2xl font-bold text-white">7</span>
+                                                <span class="text-xs text-gray-300">days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <span class="streak-fire text-lg">🔥</span>
+                                        <span class="font-medium text-gray-300">Keep the momentum!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:w-1/3">
+                                 <div class="glass-dark p-4 shadow h-full flex flex-col justify-center">
+                                    <h3 class="font-bold mb-3 text-white">Stay Consistent</h3>
+                                    <p class="text-gray-300 text-sm mb-2">Applying consistently is key. Taylor helps you build that habit.</p>
+                                    <p class="text-gray-300 text-sm">Aim for a few tailored applications each day.</p>
+                                    <button class="mt-4 text-blue-100 text-sm font-medium hover:text-blue-300 w-full text-left">View Full History (Coming Soon)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-16 text-white">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Stop Sending Generic Resumes, Get Taylor Now - It's Free!</h2>
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Let Taylor, your AI Career Stylist, craft custom-fit applications that get noticed.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold transition duration-300 hover:bg-opacity-90 hover:shadow-[0_4px_15px_rgba(255,255,255,0.2)] hover:-translate-y-0.5 hover:text-blue-300">
+                            Install Free Extension
+                        </a>
+                        <button class="bg-transparent border-2 border-white px-8 py-4 rounded-full text-lg font-bold transition duration-300 hover:bg-white/10 hover:-translate-y-0.5">
+                            How Taylor Works
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Student Developer Section -->
+            <section class="py-12 text-white">
+                <div class="container mx-auto px-4">
+                    <div class="glass p-8 max-w-3xl mx-auto text-center">
+                        <h2 class="text-2xl font-bold mb-4">About the Developer</h2>
+                        <p class="text-gray-300 mb-6">Taylor is created by an individual student developer passionate about making the job search process easier. Your support and feedback are greatly appreciated as I continue to improve this tool.</p>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" target="_blank" class="bg-blue-600/80 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-600/100 transition flex items-center justify-center">
+                                <i class="fab fa-linkedin mr-2"></i> Connect on LinkedIn
+                            </a>
+                            <a href="mailto:valluruchetanreddy@gmail.com" class="bg-transparent border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition flex items-center justify-center">
+                                <i class="fas fa-envelope mr-2"></i> Get in Touch
+                            </a>
+                        </div>
+                        
+                        <p class="text-gray-400 text-sm mt-6">If you find Taylor helpful, sharing with fellow job-seekers is the best way to show support!</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Footer -->
+            <footer class="glass-dark text-white py-12 mt-16">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                        <div>
+                            <h3 class="font-bold mb-4 text-white">Taylor</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                                <li><a href="#extension" class="text-gray-400 hover:text-white transition">How it Works</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Chrome Extension</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Updates</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-4 text-white">Resources</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Guides</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-4 text-white">Legal</h3>
+                            <ul class="space-y-2">
+                                <li><a href="privacy_policy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-4 text-white">Connect</h3>
+                            <div class="flex space-x-4 mb-4">
+                                <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                            <p class="text-gray-400">valluruchetanreddy@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="pt-8 border-t border-white/10 text-center text-gray-400">
+                        <p>© 2025 Taylor AI. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
 
     <script>
@@ -678,6 +575,24 @@
                 });
             }
         });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.ripple.min.js"></script>
+    <script>
+    VANTA.RIPPLE({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color1: 0xa78bfa,
+      color2: 0x05192d,
+      backgroundColor: 0x030f1a,
+      amplitudeFactor: 1.20
+    })
     </script>
 </body>
 </html>
