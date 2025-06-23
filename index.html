@@ -345,43 +345,35 @@
                             <div class="inner-card p-4 m-1.5">
                                 <h3 class="text-center mb-3">Applications Today</h3>
                                 <div class="flex justify-around items-center">
-                                    <button class="counter-button flex items-center justify-center text-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">+1</button>
+                                    <button id="hero-counter-plus-btn" class="counter-button flex items-center justify-center text-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">+1</button>
                                     <div class="text-center counter-display">
-                                        <div class="counter-value">0</div>
+                                        <div id="hero-counter-value" class="counter-value">0</div>
                                         <div class="streak-display mt-1">
-                                            <span>0 🔥</span>
+                                            <span id="hero-streak-value">0 🔥</span>
                                         </div>
                                     </div>
-                                    <button class="counter-button flex items-center justify-center font-semibold hover:bg-gray-50 transition-all active:scale-95">Reset</button>
+                                    <button id="hero-counter-reset-btn" class="counter-button flex items-center justify-center font-semibold hover:bg-gray-50 transition-all active:scale-95">Reset</button>
                                 </div>
                             </div>
 
                             <!-- Job Description (Placeholder) -->
-                            <div class="description-card rounded-xl p-3 m-1.5 text-xs text-gray-600 leading-relaxed">
-                                ...innovative environment. Professional growth and development opportunities. Collaborative and supportive team culture. Chance to make a meaningful impact on the healthcare industry.
+                            <div id="hero-description-card" class="description-card rounded-xl p-3 m-1.5 text-xs text-gray-600 leading-relaxed">
+                                Click "Re-Scrape" to pull in job details...
                             </div>
 
                             <!-- Job Skills Analysis -->
                             <div class="inner-card p-4 m-1.5">
                                 <h3 class="text-center mb-4">Job Skills Analysis</h3>
-                                <div class="flex flex-wrap gap-2 justify-center">
-                                    <span class="skill-tag skill-tag-has">LLM fine-tuning</span>
-                                    <span class="skill-tag skill-tag-has">Prompt engineering</span>
-                                    <span class="skill-tag skill-tag-has">Retrieval-Augmented Generation (RAG)</span>
-                                    <span class="skill-tag skill-tag-missing">Recall</span>
-                                    <span class="skill-tag skill-tag-has">HIPAA compliance</span>
-                                    <span class="skill-tag skill-tag-missing">FHIR</span>
-                                    <span class="skill-tag skill-tag-has">MLOps</span>
-                                    <span class="skill-tag skill-tag-has">Python</span>
-                                    <span class="skill-tag skill-tag-has">Huggingface</span>
+                                <div id="hero-skills-container" class="flex flex-wrap gap-2 justify-center">
+                                    <span class="skill-tag skill-tag-missing">No job scraped</span>
                                 </div>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex justify-between space-x-2 p-1.5">
-                                <button class="action-button action-button-primary hover:bg-blue-600 transition active:scale-95">Re-Scrape Description</button>
-                                <button class="action-button hover:bg-gray-50 transition active:scale-95">Generate Resume</button>
-                                <button class="action-button hover:bg-gray-50 transition active:scale-95">Generate Cover Letter</button>
+                                <button id="hero-scrape-btn" class="action-button action-button-primary hover:bg-blue-600 transition active:scale-95">Re-Scrape Description</button>
+                                <button id="hero-generate-resume-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Resume</button>
+                                <button id="hero-generate-cover-letter-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Cover Letter</button>
                             </div>
                         </div>
                     </div>
@@ -461,57 +453,7 @@
                     </div>
                 </div>
             </section>
-            <section class="text-white py-24 md:py-32" id="features">
-                <div class="container mx-auto px-4">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-white">How Taylor Works</h2>
-                        <p class="text-lg text-[#e0e0e0] max-w-3xl mx-auto mt-4">Integrate Taylor directly into your job search workflow on sites like LinkedIn, Indeed, and more. Generate tailored application materials in seconds.</p>
-                    </div>
-                    <div class="glass p-6">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <!-- Left Side: Controls -->
-                            <div>
-                                <div class="glass-dark p-4 shadow mb-4">
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h3 class="font-bold text-white">1. Scrape Job Details</h3>
-                                        <button id="scrapeJobBtnInline" class="bg-purple-500/80 text-white px-3 py-1 rounded text-sm font-medium hover:bg-purple-500/100 transition flex items-center border border-white/10">
-                                            <i class="fas fa-bolt mr-1"></i> Scrape Job
-                                        </button>
-                                    </div>
-                                    <div class="p-3 bg-black/[.35] rounded h-48 overflow-y-auto" id="jobDescriptionText">
-                                        <p class="text-[#b0b0b0] text-center mt-16">Click "Scrape Job" on a job listing page...</p>
-                                    </div>
-                                </div>
-                                <div class="glass-dark p-4 shadow mb-4">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h3 class="font-bold text-white">2. Generate Documents</h3>
-                                        <span id="aiStatus" class="text-xs text-[#b0b0b0]">Status: Idle</span>
-                                    </div>
-                                    <div id="aiAlerts" class="text-sm text-center p-1 rounded"></div>
-                                    <div class="flex space-x-2 mt-2">
-                                        <button id="generateResumeBtnInline" class="bg-blue-500/80 text-white w-full py-2 rounded font-medium hover:bg-blue-500/100 transition border border-white/10">Generate Resume</button>
-                                        <button id="generateCoverLetterBtnInline" class="bg-blue-500/80 text-white w-full py-2 rounded font-medium hover:bg-blue-500/100 transition border border-white/10">Generate Cover Letter</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Right Side: Preview -->
-                            <div>
-                                <div class="glass-dark p-4 shadow h-full">
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h3 class="font-bold text-white">3. Preview & Edit</h3>
-                                        <button id="downloadPdfBtn" class="bg-[#34d399]/80 text-white px-3 py-1 rounded text-sm font-medium hover:bg-[#34d399] transition flex items-center border border-white/10" disabled>
-                                            <i class="fas fa-download mr-1"></i> Export PDF
-                                        </button>
-                                    </div>
-                                    <div class="p-3 bg-black/[.35] rounded h-48 overflow-y-auto" id="documentPreview">
-                                        <p class="text-[#b0b0b0] text-center mt-16">Generated document preview appears here...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
             <section id="story" class="py-24 md:py-32">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
@@ -525,22 +467,26 @@
                             <!-- The Problem -->
                             <div class="text-center md:text-left">
                                 <div class="flex items-center justify-center md:justify-start mb-4">
-                                    <i class="fas fa-redo text-red-400 text-3xl mr-4"></i>
+                                    <span class="text-3xl mr-4">🔁</span>
                                     <h3 class="text-2xl font-bold text-white">The Loop That Breaks You</h3>
                                 </div>
-                                <p class="text-[#e0e0e0] text-lg">
-                                    You graduate. You're ready. But then comes the grind, dozens of tabs open, copy-pasting job descriptions into AI chats, rewriting your resume line by line, and cover letters? Fresh every time. Hours vanish. Creativity fades. Potential stalls. It’s a loop. And it breaks people.
-                                </p>
+                                <div class="space-y-4 text-[#e0e0e0] text-lg">
+                                    <p>You graduate full of ambition, fuelled by dreams. You’re ready to take on the world. But then… reality hits. You open one job portal, then another, and another.</p>
+                                    <p>Soon, your browser is cluttered with tabs. You’re copying job descriptions into AI chats, tailoring resumes word by word, rewriting cover letters for companies that may never reply. It becomes a ritual. A grind. A loop.</p>
+                                    <p>Hours slip by. Energy drains. Your creativity fades. And slowly, quietly, your potential starts to rust. This loop doesn’t just exhaust you. It breaks you.</p>
+                                </div>
                             </div>
                             <!-- The Solution -->
                             <div class="text-center md:text-left border-t-2 md:border-t-0 md:border-l-2 border-white/10 pt-8 md:pt-0 md:pl-8">
                                 <div class="flex items-center justify-center md:justify-start mb-4">
-                                    <i class="fas fa-magic text-blue-400 text-3xl mr-4"></i>
+                                    <span class="text-3xl mr-4">✨</span>
                                     <h3 class="text-2xl font-bold text-white">The Tool I Needed</h3>
                                 </div>
-                                <p class="text-[#e0e0e0] text-lg">
-                                    I’ve been through it, from building NLP pipelines to fine-tuning LLaMA models. But this time, I didn’t use AI to chase research papers. I used it to fix something real. <strong>Taylor</strong> is the tool I wish existed when I was buried under job boards and now, it’s here for every student just like me.
-                                </p>
+                                <div class="space-y-4 text-[#e0e0e0] text-lg">
+                                    <p>I know this loop. I’ve lived it. And I didn’t just survive it but built my way out. It wasn’t just another AI project it was personal.</p>
+                                    <p>I wanted a tool that would stop the cycle. A tool that would let me focus on what matters: my skills, my passion, my future. I wanted an AI that could understand job descriptions, analyze my resume, and generate tailored applications in seconds.</p>
+                                    <p>That’s how Taylor was born from need. The tool I desperately wished existed when I was buried under tabs and rejection. Now it’s real. Now it’s here. For every dreamer who deserves a breakthrough.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -763,6 +709,81 @@
                     videoIframe.classList.remove('hidden');
                 });
             }
+
+            // New Hero Component Mock Functionality
+            const heroCounterPlusBtn = document.getElementById('hero-counter-plus-btn');
+            const heroCounterResetBtn = document.getElementById('hero-counter-reset-btn');
+            const heroCounterValue = document.getElementById('hero-counter-value');
+            const heroStreakValue = document.getElementById('hero-streak-value');
+            let heroCount = 0;
+            let heroStreak = 0;
+
+            heroCounterPlusBtn.addEventListener('click', () => {
+                heroCount++;
+                heroStreak++;
+                heroCounterValue.textContent = heroCount;
+                heroStreakValue.innerHTML = `${heroStreak} 🔥`;
+                if (heroStreak > 0) {
+                    heroStreakValue.parentElement.classList.add('streak-fire');
+                }
+            });
+
+            heroCounterResetBtn.addEventListener('click', () => {
+                heroCount = 0;
+                heroStreak = 0;
+                heroCounterValue.textContent = heroCount;
+                heroStreakValue.innerHTML = `${heroStreak} 🔥`;
+                heroStreakValue.parentElement.classList.remove('streak-fire');
+            });
+
+            const heroScrapeBtn = document.getElementById('hero-scrape-btn');
+            const heroDescriptionCard = document.getElementById('hero-description-card');
+            const heroSkillsContainer = document.getElementById('hero-skills-container');
+            const heroGenerateResumeBtn = document.getElementById('hero-generate-resume-btn');
+            const heroGenerateCoverLetterBtn = document.getElementById('hero-generate-cover-letter-btn');
+
+            heroScrapeBtn.addEventListener('click', () => {
+                heroDescriptionCard.innerHTML = '<i>Scraping job details...</i>';
+                heroScrapeBtn.textContent = 'Scraping...';
+                heroScrapeBtn.disabled = true;
+
+                setTimeout(() => {
+                    heroDescriptionCard.innerHTML = '<strong>Data Scientist @ Innovate Inc.</strong> ...seeking a candidate with strong Python, SQL, and Machine Learning skills. Experience with cloud platforms like AWS or GCP is a plus. Join our dynamic team...';
+                    
+                    heroSkillsContainer.innerHTML = `
+                        <span class="skill-tag skill-tag-has">Python</span>
+                        <span class="skill-tag skill-tag-has">SQL</span>
+                        <span class="skill-tag skill-tag-has">Machine Learning</span>
+                        <span class="skill-tag skill-tag-missing">AWS</span>
+                        <span class="skill-tag skill-tag-missing">GCP</span>
+                    `;
+                    
+                    heroGenerateResumeBtn.disabled = false;
+                    heroGenerateCoverLetterBtn.disabled = false;
+                    heroScrapeBtn.textContent = 'Re-Scrape Description';
+                    heroScrapeBtn.disabled = false;
+
+                }, 1500);
+            });
+
+            const handleHeroGenerate = (btn, type) => {
+                const originalText = btn.textContent;
+                btn.textContent = `Generating...`;
+                btn.disabled = true;
+                heroScrapeBtn.disabled = true;
+
+                setTimeout(() => {
+                    btn.textContent = `${type} Ready!`;
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                        heroScrapeBtn.disabled = false;
+                    }, 2000);
+                }, 2000);
+            };
+
+            heroGenerateResumeBtn.addEventListener('click', () => handleHeroGenerate(heroGenerateResumeBtn, 'Resume'));
+            heroGenerateCoverLetterBtn.addEventListener('click', () => handleHeroGenerate(heroGenerateCoverLetterBtn, 'Letter'));
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
