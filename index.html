@@ -8,108 +8,229 @@
     <link href="dist/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* A subtle, premium background that is very lightweight */
+        /* ---
+        Glassmorphism & Neuromorphism UI Overhaul
+        --- */
+
+        /* --- Core Setup & Variables --- */
+        :root {
+            --bg-color: #eef1f5;
+            --primary-color: #0d6efd;
+            --primary-color-dark: #0b5ed7;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --neu-shadow-light: rgba(255, 255, 255, 0.9); /* Softer highlight */
+            --neu-shadow-dark: rgba(174, 188, 205, 0.5); /* Softer shadow */
+            --glass-bg: rgba(255, 255, 255, 0.25); /* More transparent for liquid effect */
+            --glass-border: rgba(255, 255, 255, 0.3); /* Subtler border */
+            --blur-amount: 16px; /* Increased blur */
+            --radius: 1rem; /* Rounder, more 'liquid' corners */
+        }
+
         html {
-            background: linear-gradient(135deg, #030f1a, #0a192f, #0b0b3c);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
         }
         body {
-            background-color: transparent;
-            color: #e0e0e0; /* Light gray for default text */
+            /* A more dynamic background makes the glass effect pop. */
+            background-color: var(--bg-color); /* Fallback */
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(214, 80%, 85%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 95% 95%, hsla(280, 70%, 80%, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-secondary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
         }
 
-        /* Glassmorphism base style */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            transform-origin: 50% 50%;
+        /* --- Typography --- */
+        h1, h2, h3, h4, h5, h6, .font-bold {
+            color: var(--text-primary);
         }
-        .glass-dark {
-             background: rgba(0, 0, 0, 0.4);
-             backdrop-filter: blur(15px);
-             -webkit-backdrop-filter: blur(15px);
-             border-radius: 1rem;
-             border: 1px solid rgba(255, 255, 255, 0.1);
-             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-             transition: all 0.3s ease;
+        h1 { font-size: 3rem; line-height: 1.2; }
+        h2 { font-size: 2.5rem; line-height: 1.2; }
+        h3 { font-size: 1.75rem; }
+        p, li, span {
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        a:hover {
+            color: var(--primary-color-dark);
+        }
+        /* Remap tailwind colors for light theme */
+        .text-gray-300, .text-\[\#e0e0e0\] { color: #6c757d !important; }
+        .text-gray-400, .text-\[\#b0b0b0\] { color: #6c757d !important; }
+        .text-blue-300 { color: var(--primary-color); }
+        .hover\:text-blue-300:hover { color: var(--primary-color) !important; }
+        .text-purple-300 { color: #6f42c1; }
+        .text-green-300 { color: #198754; }
+        .text-blue-400 { color: var(--primary-color); }
+        .text-purple-400 { color: #6f42c1; }
+        .text-green-400 { color: #198754; }
+        .text-yellow-400 { color: #ffc107; }
+
+
+        /* --- Buttons (Neuromorphic Twist) --- */
+        .neu-button-dark {
+            background: var(--primary-color);
+            color: #ffffff !important;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 
+                -5px -5px 12px var(--neu-shadow-light), 
+                5px 5px 12px var(--neu-shadow-dark),
+                inset 1px 1px 2px rgba(255,255,255,0.3);
+            transition: all 0.2s ease-in-out;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .neu-button-dark:hover {
+            background: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 
+                -7px -7px 16px var(--neu-shadow-light), 
+                7px 7px 16px var(--neu-shadow-dark),
+                inset 1px 1px 2px rgba(255,255,255,0.3);
+        }
+        .neu-button-dark:active {
+            transform: translateY(0);
+            background: var(--primary-color-dark);
+            box-shadow: 
+                inset -4px -4px 8px rgba(0,0,0,0.15), 
+                inset 4px 4px 8px var(--neu-shadow-dark);
+        }
+
+        /* --- Containers & Cards (Glassmorphism) --- */
+        .glass, .glass-dark {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(60, 80, 110, 0.15),
+                        inset 1px 1px 0px rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
         }
         .glass-hover:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(60, 80, 110, 0.2),
+                        inset 1px 1px 0px rgba(255,255,255,0.5);
+            border-color: rgba(255, 255, 255, 0.5);
         }
-        .neu-glass {
-            background: linear-gradient(145deg, rgba(235, 242, 250, 0.65), rgba(215, 228, 245, 0.55));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 25px rgba(60, 80, 110, 0.18), 6px 6px 12px rgba(174, 188, 205, 0.45), -6px -6px 12px rgba(255, 255, 255, 0.8);
-        }
-        .streak-fire {
-            animation: pulse 1.5s infinite;
-            color: #ffcc00;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-        .progress-ring__circle {
-            transition: stroke-dashoffset 0.35s;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-        }
-        /* Ensure text is readable */
-        h1, h2, h3, h4, h5, h6, .font-bold {
-            color: #ffffff;
-        }
-        .text-gray-300 { color: #e0e0e0 !important; }
-        .text-gray-400 { color: #b0b0b0 !important; }
-        .text-gray-500 { color: #909090 !important; }
-        .text-blue-600 { color: #60a5fa; }
-        .text-green-400 { color: #34d399; }
-        .text-purple-400 { color: #a78bfa; }
-        .text-yellow-400 { color: #facc15; }
-        .text-blue-100 { color: #bfdbfe; }
-        .hover\:text-blue-300:hover { color: #93c5fd; }
 
-        /* Input/Select styles */
-        select, input[type="text"], input[type="checkbox"], textarea, .bg-black\/20 {
-            background: rgba(0, 0, 0, 0.35) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #e0e0e0 !important;
+        /* --- Navigation --- */
+        nav.glass {
+            background-color: rgba(238, 241, 245, 0.7); /* Slightly more opaque for readability */
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            box-shadow: 0 2px 10px rgba(60, 80, 110, 0.1);
+            border: none;
+            border-bottom: 1px solid var(--glass-border);
         }
-        select option {
-            background: #0a385f;
-            color: #e0e0e0;
+        nav .font-bold, nav a, nav i {
+            color: var(--text-primary) !important;
         }
-        
-        /* Color Overrides for consistency */
-        .bg-purple-500 { background-color: #a78bfa !important; }
-        .bg-purple-500\/80 { background-color: rgba(167, 139, 250, 0.8) !important; }
-        .hover\:bg-purple-500\/100:hover { background-color: rgba(167, 139, 250, 1) !important; }
-        .bg-blue-500\/80 { background-color: rgba(96, 165, 250, 0.8) !important; }
-        .hover\:bg-blue-500\/100:hover { background-color: rgba(96, 165, 250, 1) !important; }
-        .bg-white\/5 { background-color: rgba(255,255,255,0.05) !important; }
-        .border-white\/10 { border-color: rgba(255,255,255,0.1) !important; }
-        .bg-blue-500\/20 { background-color: rgba(96, 165, 250, 0.2) !important; }
-        .border-blue-500\/30 { border-color: rgba(96, 165, 250, 0.3) !important; }
-        .bg-purple-500\/20 { background-color: rgba(167, 139, 250, 0.2) !important; }
-        .border-purple-500\/30 { border-color: rgba(167, 139, 250, 0.3) !important; }
-        .bg-green-500\/20 { background-color: rgba(52, 211, 153, 0.2) !important; }
-        .border-green-500\/30 { border-color: rgba(52, 211, 153, 0.3) !important; }
-        .bg-green-500\/80 { background-color: rgba(52, 211, 153, 0.8) !important; }
-        .hover\:bg-green-500\/100:hover { background-color: rgba(52, 211, 153, 1) !important; }
+        nav a:hover {
+            color: var(--primary-color) !important;
+        }
 
-        /* Light theme component overrides */
+        /* --- Timeline --- */
+        .timeline-step-icon {
+            background: var(--bg-color);
+            box-shadow: -4px -4px 8px var(--neu-shadow-light), 4px 4px 8px var(--neu-shadow-dark);
+            border: none;
+        }
+        .timeline-step-icon span { color: var(--primary-color) !important; }
+        .absolute.left-8.top-0.h-full.w-0\.5 { 
+            background: linear-gradient(var(--bg-color), var(--primary-color), var(--bg-color));
+            box-shadow: inset 1px 1px 3px var(--neu-shadow-dark);
+        }
+
+        /* --- Features --- */
+        .feature-icon-bg {
+            background: var(--bg-color);
+            box-shadow: inset -3px -3px 7px var(--neu-shadow-light), inset 3px 3px 7px var(--neu-shadow-dark);
+            border: none;
+        }
+        .feature-icon-bg i { color: var(--primary-color); }
+
+        /* --- Pricing & CTA Buttons --- */
+        .pricing-button {
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            color: white !important;
+            box-shadow: -4px -4px 10px var(--neu-shadow-light), 4px 4px 10px var(--neu-shadow-dark);
+        }
+        .pricing-button:hover {
+            transform: translateY(-2px);
+            box-shadow: -6px -6px 14px var(--neu-shadow-light), 6px 6px 14px var(--neu-shadow-dark);
+        }
+        .bg-purple-500\/80 { background-color: var(--primary-color) !important; }
+        .hover\:bg-purple-500\/100:hover { background-color: var(--primary-color-dark) !important; }
+        .bg-blue-500\/80 { background-color: var(--text-secondary) !important; }
+        .hover\:bg-blue-500\/100:hover { background-color: #5c636a !important; }
+        .bg-transparent.border {
+            background: var(--bg-color) !important;
+            border: 1px solid transparent !important;
+            color: var(--text-secondary) !important;
+            box-shadow: -4px -4px 8px var(--neu-shadow-light), 4px 4px 8px var(--neu-shadow-dark);
+        }
+        .bg-transparent.border:hover {
+            color: var(--primary-color) !important;
+            box-shadow: -5px -5px 10px var(--neu-shadow-light), 5px 5px 10px var(--neu-shadow-dark);
+        }
+        .bg-transparent.border:active {
+            box-shadow: inset -3px -3px 7px var(--neu-shadow-light), inset 3px 3px 7px var(--neu-shadow-dark);
+        }
+
+        /* --- Developer Section Buttons --- */
+        .bg-blue-600\/80 { 
+            background-color: var(--primary-color) !important; 
+            color: white !important; 
+            box-shadow: -4px -4px 10px var(--neu-shadow-light), 4px 4px 10px var(--neu-shadow-dark);
+        }
+        .hover\:bg-blue-600\/100:hover { 
+            background-color: var(--primary-color-dark) !important; 
+            box-shadow: -6px -6px 14px var(--neu-shadow-light), 6px 6px 14px var(--neu-shadow-dark);
+        }
+        .bg-transparent.border.border-white\/20 {
+            background: var(--bg-color) !important;
+            border-color: transparent !important;
+            color: var(--text-secondary) !important;
+            box-shadow: -4px -4px 8px var(--neu-shadow-light), 4px 4px 8px var(--neu-shadow-dark);
+        }
+        .hover\:bg-white\/10:hover {
+            background-color: var(--bg-color) !important;
+            color: var(--primary-color) !important;
+            box-shadow: -5px -5px 10px var(--neu-shadow-light), 5px 5px 10px var(--neu-shadow-dark);
+        }
+
+        /* --- Footer --- */
+        footer.glass-dark {
+            background: transparent;
+            border-top: 1px solid var(--glass-border);
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        footer h3 { color: var(--text-primary) !important; }
+        footer a, footer p, footer i { color: var(--text-secondary) !important; }
+        footer a:hover { color: var(--primary-color) !important; }
+
+        /* --- DO NOT CHANGE: Styles for the demo component to replicate the extension's look --- */
         .light-theme-component {
             color: #374151 !important; /* Default to text-gray-700 */
+        }
+        .light-theme-component * {
+            color: initial; /* Reset colors for children */
         }
         .light-theme-component h1, .light-theme-component h2, .light-theme-component h3, .light-theme-component .font-bold {
             color: #1f2937 !important; /* text-gray-800 */
@@ -119,8 +240,6 @@
         .light-theme-component .text-orange-500 { color: #f97316 !important; }
         .light-theme-component .text-green-800 { color: #047857 !important; }
         .light-theme-component .text-white { color: #ffffff !important; }
-
-        /* Styles to replicate the extension's look */
         .light-theme-component {
             --neu-shadow-dark: rgba(174, 188, 205, 0.45);
             --neu-shadow-light: rgba(255, 255, 255, 0.8);
@@ -144,17 +263,14 @@
             color: var(--text-color-primary);
             transform: scale(0.8);
         }
-
-        /* Header */
         .light-theme-component .component-header {
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-            
         }
         .light-theme-component .component-header h2 {
             font-size: 16px;
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--accent-color) !important;
         }
         .light-theme-component .component-header button {
             width: 24px;
@@ -166,8 +282,6 @@
         .light-theme-component .component-header button:hover {
             background: rgba(0, 0, 0, 0.1);
         }
-
-        /* Inner Cards */
         .light-theme-component .inner-card {
             background: linear-gradient(145deg, rgba(215, 228, 245, 0.7), rgba(200, 215, 235, 0.6));
             border-radius: var(--radius);
@@ -177,11 +291,9 @@
         }
         .light-theme-component .inner-card h3 {
             font-size: 15px;
-            color: var(--text-color-primary);
+            color: var(--text-color-primary) !important;
             font-weight: 700;
         }
-
-        /* Special card for description */
         .light-theme-component .description-card {
             background: rgba(215, 228, 245, 0.8);
             box-shadow: 
@@ -189,8 +301,6 @@
                 0 1px 3px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
-
-        /* Counter section specifics */
         .light-theme-component .counter-display .counter-value {
             font-size: 46px;
             font-weight: 800;
@@ -225,8 +335,6 @@
              box-shadow: 
                 inset 3px 3px 6px var(--neu-shadow-dark);
         }
-
-        /* Skill Tags */
         .light-theme-component .skill-tag {
             padding: 4px 12px;
             border-radius: 16px;
@@ -247,8 +355,6 @@
             color: var(--accent-color);
             border: 1px dashed var(--accent-color);
         }
-
-        /* Action Buttons */
         .light-theme-component .action-button {
             flex: 1;
             padding: 12px;
@@ -268,27 +374,39 @@
             background: linear-gradient(145deg, #0a66c2, #0a66c2d9);
             color: white;
         }
+        /* --- End of DO NOT CHANGE section --- */
 
-        /* Neuromorphic Button for Dark BG */
-        .neu-button-dark {
-            background: linear-gradient(145deg, #2a3a4a, #1a2a3a);
-            border-radius: 9999px; /* rounded-full */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.25), -5px -5px 10px rgba(255,255,255,0.05);
-            transition: all 0.2s ease-in-out;
-            color: #e0e0e0;
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        .streak-fire {
+            animation: pulse 1.5s infinite;
+            color: #f97316; /* Orange fire color for light theme */
         }
-        .neu-button-dark:hover {
-            box-shadow: 7px 7px 14px rgba(0,0,0,0.3), -7px -7px 14px rgba(255,255,255,0.07);
-            transform: translateY(-2px);
-            color: #ffffff;
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
-        .neu-button-dark:active {
-            box-shadow: inset 3px 3px 6px rgba(0,0,0,0.5), inset -3px -3px 6px rgba(255,255,255,0.05);
-            transform: translateY(1px);
-            color: #d0d0d0;
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .section-bg-alt {
+            background-color: transparent; /* Remove the solid background */
+            background-image: 
+                radial-gradient(at 10% 90%, hsla(214, 70%, 90%, 0.2) 0px, transparent 60%),
+                radial-gradient(at 90% 10%, hsla(280, 60%, 90%, 0.15) 0px, transparent 60%);
+            position: relative;
+        }
+        
+        /* Ensure consistent background across all sections */
+        section {
+            position: relative;
+        }
+        
+        /* Override any conflicting backgrounds */
+        .container {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -299,23 +417,23 @@
     <!-- Content Wrapper -->
     <div class="relative z-10">
         <!-- Navigation -->
-        <nav class="text-white fixed top-0 left-0 right-0 z-50 glass">
+        <nav class="fixed top-0 left-0 right-0 z-50 glass">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-wand-magic-sparkles text-2xl"></i>
                     <span class="text-xl font-bold">Taylor</span>
                 </div>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#features" class="hover:text-blue-300 transition">Our Secret Sauce</a>
-                    <a href="#story" class="hover:text-blue-300 transition">Why It Matters</a>
-                    <a href="#pricing" class="hover:text-blue-300 transition">Pricing</a>
-                    <a href="#how-it-works" class="hover:text-blue-300 transition">How It Works</a>
+                    <a href="#features" class="transition">Our Secret Sauce</a>
+                    <a href="#story" class="transition">Why It Matters</a>
+                    <a href="#pricing" class="transition">Pricing</a>
+                    <a href="#how-it-works" class="transition">How It Works</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="neu-button-dark px-4 py-2 flex items-center">
                        Add to Chrome
                     </a>
-                    <button class="md:hidden text-white">
+                    <button class="md:hidden">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -324,11 +442,11 @@
 
         <div class="pt-16">
             <!-- Hero Section -->
-            <section class="text-white py-24 md:py-32">
+            <section class="py-24 md:py-32">
                 <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
                     <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Your Resume, Reimagined.<br> Custom Fit. Every Time.</h1>
-                        <p class="text-xl text-[#e0e0e0] mb-8">Because one-size doesn’t get hired. Taylor crafts AI-personalized resumes and cover letters directly on job sites.</p>
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Resume, Reimagined.<br> Custom Fit. Every Time.</h1>
+                        <p class="text-xl mb-8">Because one-size doesn’t get hired. Taylor crafts AI-personalized resumes and cover letters directly on job sites.</p>
                         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
                             <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="neu-button-dark px-8 py-4 text-lg flex items-center justify-center">
                                 Add Taylor to Chrome
@@ -351,46 +469,48 @@
                             <div class="inner-card p-4 m-1.5">
                                 <h3 class="text-center mb-3">Applications Today</h3>
                                 <div class="flex justify-around items-center">
-                                    <button id="hero-counter-plus-btn" class="counter-button flex items-center justify-center text-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">+1</button>
+                                    <button class="counter-button flex items-center justify-center text-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">+1</button>
                                     <div class="text-center counter-display">
-                                        <div id="hero-counter-value" class="counter-value">0</div>
-                                        <div class="streak-display mt-1">
-                                            <span id="hero-streak-value">0 🔥</span>
+                                        <div class="counter-value">3</div>
+                                        <div class="streak-display mt-1 streak-fire">
+                                            <span>2 🔥</span>
                                         </div>
                                     </div>
-                                    <button id="hero-counter-reset-btn" class="counter-button flex items-center justify-center font-semibold hover:bg-gray-50 transition-all active:scale-95">Reset</button>
+                                    <button class="counter-button flex items-center justify-center font-semibold hover:bg-gray-50 transition-all active:scale-95">Reset</button>
                                 </div>
                             </div>
 
                             <!-- Job Description (Placeholder) -->
-                            <div id="hero-description-card" class="description-card rounded-xl p-3 m-1.5 text-xs text-gray-600 leading-relaxed">
-                                Click "Re-Scrape" to pull in job details...
+                            <div class="description-card rounded-xl p-3 m-1.5 text-xs text-gray-600 leading-relaxed">
+                                <strong>Senior Frontend Developer @ Tech Innovations Inc.</strong> ...seeking a candidate with strong React.js, TypeScript, and state management skills...
                             </div>
 
                             <!-- Job Skills Analysis -->
                             <div class="inner-card p-4 m-1.5">
                                 <h3 class="text-center mb-4">Job Skills Analysis</h3>
-                                <div id="hero-skills-container" class="flex flex-wrap gap-2 justify-center">
-                                    <span class="skill-tag skill-tag-missing">No job scraped</span>
+                                <div class="flex flex-wrap gap-2 justify-center">
+                                    <span class="skill-tag skill-tag-has">React.js</span>
+                                    <span class="skill-tag skill-tag-has">TypeScript</span>
+                                    <span class="skill-tag skill-tag-missing">GraphQL</span>
                                 </div>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex justify-between space-x-2 p-1.5">
-                                <button id="hero-scrape-btn" class="action-button action-button-primary hover:bg-blue-600 transition active:scale-95">Re-Scrape Description</button>
-                                <button id="hero-generate-resume-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Resume</button>
-                                <button id="hero-generate-cover-letter-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Cover Letter</button>
+                                <button class="action-button action-button-primary hover:bg-blue-600 transition active:scale-95">Re-Scrape</button>
+                                <button class="action-button hover:bg-gray-50 transition active:scale-95">Generate Resume</button>
+                                <button class="action-button hover:bg-gray-50 transition active:scale-95">Generate Letter</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             <!-- How It Works Section -->
-            <section id="how-it-works" class="py-24 md:py-32 text-white">
+            <section id="how-it-works" class="py-24 md:py-32">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-20">
                         <h2 class="text-4xl font-extrabold tracking-tight">Getting Started in 3 Simple Steps</h2>
-                        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                        <p class="mt-4 text-lg max-w-3xl mx-auto">
                             Go from zero to your first AI-tailored application in just a few minutes. Here’s how to set up Taylor for success.
                         </p>
                     </div>
@@ -398,19 +518,19 @@
                     <!-- Vertical Timeline -->
                     <div class="relative max-w-3xl mx-auto">
                         <!-- The vertical line -->
-                        <div class="absolute left-8 top-0 h-full w-0.5 bg-white/10" aria-hidden="true"></div>
+                        <div class="absolute left-8 top-0 h-full w-0.5 bg-gray-200" aria-hidden="true"></div>
 
                         <!-- Step 1 -->
                         <div class="relative pb-16">
-                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 border-2 border-blue-500/50 shadow-lg">
-                                <span class="text-3xl font-bold text-blue-300">1</span>
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full timeline-step-icon">
+                                <span class="text-3xl font-bold">1</span>
                             </div>
                             <div class="ml-24 glass-dark p-6 rounded-lg">
                                 <div class="flex items-center mb-3">
                                     <i class="fas fa-key text-blue-400 text-2xl w-8"></i>
                                     <h3 class="text-2xl font-bold">Get Your API Key</h3>
                                 </div>
-                                <p class="text-gray-300 mb-4">
+                                <p class="mb-4">
                                     Taylor is powered by Google's Gemini AI. To unlock its capabilities, you'll need a free API key from Google AI Studio. This is your personal key to the AI engine.
                                 </p>
                                 <a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-block bg-blue-500/80 text-white px-4 py-2 rounded font-medium hover:bg-blue-500/100 transition text-sm">
@@ -421,15 +541,15 @@
 
                         <!-- Step 2 -->
                         <div class="relative pb-16">
-                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border-2 border-purple-500/50 shadow-lg">
-                                <span class="text-3xl font-bold text-purple-300">2</span>
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full timeline-step-icon">
+                                <span class="text-3xl font-bold">2</span>
                             </div>
                             <div class="ml-24 glass-dark p-6 rounded-lg">
                                 <div class="flex items-center mb-3">
                                     <i class="fas fa-puzzle-piece text-purple-400 text-2xl w-8"></i>
                                     <h3 class="text-2xl font-bold">Install & Configure</h3>
                                 </div>
-                                <p class="text-gray-300 mb-4">
+                                <p class="mb-4">
                                     Add the Taylor extension to your Chrome browser. Once installed, open it and paste in your API key. This one-time setup securely stores your key and creates your profile.
                                 </p>
                                 <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" target="_blank" class="inline-block bg-purple-500/80 text-white px-4 py-2 rounded font-medium hover:bg-purple-500/100 transition text-sm">
@@ -440,15 +560,15 @@
 
                         <!-- Step 3 -->
                         <div class="relative">
-                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border-2 border-green-500/50 shadow-lg">
-                                <span class="text-3xl font-bold text-green-300">3</span>
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-16 h-16 rounded-full timeline-step-icon">
+                                <span class="text-3xl font-bold">3</span>
                             </div>
                             <div class="ml-24 glass-dark p-6 rounded-lg">
                                 <div class="flex items-center mb-3">
                                     <i class="fas fa-file-invoice text-green-400 text-2xl w-8"></i>
                                     <h3 class="text-2xl font-bold">Build Your Master Resume</h3>
                                 </div>
-                                <p class="text-gray-300">
+                                <p>
                                     Inside the extension, fill out your profile with your complete work history, education, projects, and skills. Think of this as your "master resume"—the single source of truth Taylor will use to craft perfectly tailored documents for any job you apply to.
                                 </p>
                                 <p class="mt-4 text-green-300 font-semibold">
@@ -459,12 +579,78 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Live Demo Section -->
+            <section id="live-demo" class="py-24 md:py-32">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-extrabold tracking-tight">Works Where You Work</h2>
+                        <p class="mt-4 text-lg max-w-3xl mx-auto">
+                            Taylor lives directly on job sites like LinkedIn. Scrape job details, analyze skills, and generate documents without ever leaving the page.
+                        </p>
+                    </div>
+                    <div class="relative max-w-6xl mx-auto glass-dark rounded-lg shadow-lg overflow-hidden p-2 sm:p-4">
+                        <!-- Replace with your screenshot -->
+                        <img src="taylor.png" alt="LinkedIn job page with Taylor extension overlay" class="rounded-md w-full">
+
+                        <!-- Overlay UI Component -->
+                        <div class="absolute top-4 right-4 sm:top-8 sm:right-8 w-full max-w-sm hidden md:block" style="transform: scale(0.9); transform-origin: top right;">
+                            <div class="light-theme-component p-1.5 w-full">
+                                <!-- Header -->
+                                <div class="component-header flex justify-between items-center">
+                                    <h2>Taylor</h2>
+                                    <div class="flex space-x-2">
+                                        <button class="rounded-full flex items-center justify-center font-mono">-</button>
+                                        <button class="rounded-full flex items-center justify-center font-mono">×</button>
+                                    </div>
+                                </div>
+
+                                <!-- Applications Today -->
+                                <div class="inner-card p-4 m-1.5">
+                                    <h3 class="text-center mb-3">Applications Today</h3>
+                                    <div class="flex justify-around items-center">
+                                        <button id="hero-counter-plus-btn" class="counter-button flex items-center justify-center text-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">+1</button>
+                                        <div class="text-center counter-display">
+                                            <div id="hero-counter-value" class="counter-value">0</div>
+                                            <div class="streak-display mt-1">
+                                                <span id="hero-streak-value">0 🔥</span>
+                                            </div>
+                                        </div>
+                                        <button id="hero-counter-reset-btn" class="counter-button flex items-center justify-center font-semibold hover:bg-gray-50 transition-all active:scale-95">Reset</button>
+                                    </div>
+                                </div>
+
+                                <!-- Job Description (Placeholder) -->
+                                <div id="hero-description-card" class="description-card rounded-xl p-3 m-1.5 text-xs text-gray-600 leading-relaxed">
+                                    Click "Re-Scrape" to pull in job details...
+                                </div>
+
+                                <!-- Job Skills Analysis -->
+                                <div class="inner-card p-4 m-1.5">
+                                    <h3 class="text-center mb-4">Job Skills Analysis</h3>
+                                    <div id="hero-skills-container" class="flex flex-wrap gap-2 justify-center">
+                                        <span class="skill-tag skill-tag-missing">No job scraped</span>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex justify-between space-x-2 p-1.5">
+                                    <button id="hero-scrape-btn" class="action-button action-button-primary hover:bg-blue-600 transition active:scale-95">Re-Scrape Description</button>
+                                    <button id="hero-generate-resume-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Resume</button>
+                                    <button id="hero-generate-cover-letter-btn" class="action-button hover:bg-gray-50 transition active:scale-95" disabled>Generate Cover Letter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <!-- Demo Video Section -->
-            <section id="extension" class="py-24 md:py-32 text-white">
+            <section id="extension" class="py-24 md:py-32 section-bg-alt">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-white">See Taylor in Action</h2>
-                        <p class="text-lg text-[#e0e0e0] max-w-3xl mx-auto mt-4">Watch this 1-minute demo to see how you can go from job description to a perfectly tailored resume and cover letter, ready to submit.</p>
+                        <h2 class="text-3xl font-bold">See Taylor in Action</h2>
+                        <p class="text-lg max-w-3xl mx-auto mt-4">Watch this 1-minute demo to see how you can go from job description to a perfectly tailored resume and cover letter, ready to submit.</p>
                     </div>
                     <div class="max-w-4xl mx-auto">
                         <div class="glass-dark rounded-lg shadow-lg overflow-hidden relative" style="padding-bottom: 56.25%;">
@@ -481,52 +667,52 @@
                     </div>
                 </div>
             </section>
-            <section id="features" class="text-white py-24 md:py-32">
+            <section id="features" class="py-24 md:py-32">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-16">
                         <h2 class="text-4xl font-extrabold tracking-tight">The Taylor Advantage</h2>
-                        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                        <p class="mt-4 text-lg max-w-3xl mx-auto">
                             Taylor isn't just another tool. It's a purpose-built AI co-pilot that streamlines your entire application workflow with unmatched precision and speed.
                         </p>
                     </div>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         <!-- Feature 1: In-Page AI -->
                         <div class="glass-dark glass-hover p-6 rounded-lg flex flex-col text-center items-center transition-all duration-300">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-purple-500/20 border border-purple-500/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 feature-icon-bg">
                                 <i class="fas fa-layer-group text-purple-400 text-3xl"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-2">Seamless In-Page AI</h3>
-                            <p class="text-gray-400 text-sm">
+                            <p class="text-sm">
                                 Taylor works directly on job sites. Its overlay highlights missing keywords and lets you inject them into your resume with a single click—no more tab-hopping.
                             </p>
                         </div>
                         <!-- Feature 2: One-Click Workflow -->
                         <div class="glass-dark glass-hover p-6 rounded-lg flex flex-col text-center items-center transition-all duration-300">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-blue-500/20 border border-blue-500/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 feature-icon-bg">
                                 <i class="fas fa-check-double text-blue-400 text-3xl"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-2">One-Click Workflow</h3>
-                            <p class="text-gray-400 text-sm">
+                            <p class="text-sm">
                                 Go from job description to a submission-ready PDF in under 60 seconds. The entire process is automated to eliminate tedious manual work.
                             </p>
                         </div>
                         <!-- Feature 3: Precision & Design -->
                         <div class="glass-dark glass-hover p-6 rounded-lg flex flex-col text-center items-center transition-all duration-300">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-green-500/20 border border-green-500/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 feature-icon-bg">
                                 <i class="fas fa-drafting-compass text-green-400 text-3xl"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-2">Precision & Design</h3>
-                            <p class="text-gray-400 text-sm">
+                            <p class="text-sm">
                                 Advanced NLP adapts your resume's tone and structure to each job description, then wraps it in a pixel-perfect, professionally formatted PDF.
                             </p>
                         </div>
                         <!-- Feature 4: Engineered for Speed -->
                         <div class="glass-dark glass-hover p-6 rounded-lg flex flex-col text-center items-center transition-all duration-300">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 bg-yellow-400/20 border border-yellow-400/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 feature-icon-bg">
                                 <i class="fas fa-bolt text-yellow-400 text-3xl"></i>
                             </div>
                             <h3 class="text-xl font-bold mb-2">Engineered for Speed</h3>
-                            <p class="text-gray-400 text-sm">
+                            <p class="text-sm">
                                 Our highly-optimized design delivers a blazing-fast experience on any machine and reduces AI costs, passing the savings directly on to you.
                             </p>
                         </div>
@@ -534,11 +720,11 @@
                 </div>
             </section>
      
-            <section id="story" class="py-24 md:py-32">
+            <section id="story" class="py-24 md:py-32 section-bg-alt">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-white">Why Taylor Exists</h2>
-                        <p class="text-lg text-[#e0e0e0] max-w-3xl mx-auto mt-4">
+                        <h2 class="text-3xl font-bold">Why Taylor Exists</h2>
+                        <p class="text-lg max-w-3xl mx-auto mt-4">
                             Taylor wasn’t born in a boardroom! it was forged in the chaos of the job hunt, built by someone who lived the pain and decided to fix it.
                         </p>
                     </div>
@@ -548,21 +734,21 @@
                             <div class="text-center md:text-left">
                                 <div class="flex items-center justify-center md:justify-start mb-4">
                                     <span class="text-3xl mr-4">🔁</span>
-                                    <h3 class="text-2xl font-bold text-white">The Loop That Breaks You</h3>
+                                    <h3 class="text-2xl font-bold">The Loop That Breaks You</h3>
                                 </div>
-                                <div class="space-y-4 text-[#e0e0e0] text-lg">
+                                <div class="space-y-4 text-lg">
                                     <p>You graduate full of ambition, fuelled by dreams. You’re ready to take on the world. But then… reality hits. You open one job portal, then another, and another.</p>
                                     <p>Soon, your browser is cluttered with tabs. You’re copying job descriptions into AI chats, tailoring resumes word by word, rewriting cover letters for companies that may never reply. It becomes a ritual. A grind. A loop.</p>
                                     <p>Hours slip by. Energy drains. Your creativity fades. And slowly, quietly, your potential starts to rust. This loop doesn’t just exhaust you. It breaks you.</p>
                                 </div>
                             </div>
                             <!-- The Solution -->
-                            <div class="text-center md:text-left border-t-2 md:border-t-0 md:border-l-2 border-white/10 pt-8 md:pt-0 md:pl-8">
+                            <div class="text-center md:text-left border-t-2 md:border-t-0 md:border-l-2 border-gray-200 pt-8 md:pt-0 md:pl-8">
                                 <div class="flex items-center justify-center md:justify-start mb-4">
                                     <span class="text-3xl mr-4">✨</span>
-                                    <h3 class="text-2xl font-bold text-white">The Tool I Needed</h3>
+                                    <h3 class="text-2xl font-bold">The Tool I Needed</h3>
                                 </div>
-                                <div class="space-y-4 text-[#e0e0e0] text-lg">
+                                <div class="space-y-4 text-lg">
                                     <p>I know this loop. I’ve lived it. And I didn’t just survive it but built my way out. It wasn’t just another AI project it was personal.</p>
                                     <p>I wanted a tool that would stop the cycle. A tool that would let me focus on what matters: my skills, my passion, my future. I wanted an AI that could understand job descriptions, analyze my resume, and generate tailored applications in seconds.</p>
                                     <p>That’s how Taylor was born from need. The tool I desperately wished existed when I was buried under tabs and rejection. Now it’s real. Now it’s here. For every dreamer who deserves a breakthrough.</p>
@@ -574,57 +760,57 @@
             </section>
             
             <!-- Pricing Section -->
-            <section id="pricing" class="py-16 text-white">
+            <section id="pricing" class="py-16">
                 <div class="container mx-auto px-4">
                     <h2 class="text-3xl font-bold text-center mb-4">Pricing</h2>
-                    <p class="text-[#e0e0e0] text-center max-w-2xl mx-auto mb-12">A simple, accessible pricing model for individuals and powerful partnership opportunities for institutions.</p>
+                    <p class="text-center max-w-2xl mx-auto mb-12">A simple, accessible pricing model for individuals and powerful partnership opportunities for institutions.</p>
                     
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
                         <!-- All-Access Subscription -->
                         <div class="glass-dark p-6 rounded-lg flex flex-col">
-                            <h3 class="text-xl font-bold text-white mb-2">All-Access Subscription</h3>
-                            <p class="text-4xl font-bold mb-4">$8<span class="text-lg font-normal text-[#b0b0b0]">/mo</span></p>
-                            <p class="text-[#b0b0b0] mb-4">or $80 per year. 14-day free trial.</p>
-                            <ul class="space-y-2 text-[#e0e0e0] flex-grow">
+                            <h3 class="text-xl font-bold mb-2">All-Access Subscription</h3>
+                            <p class="text-4xl font-bold mb-4">$8<span class="text-lg font-normal">/mo</span></p>
+                            <p class="mb-4">or $80 per year. 14-day free trial.</p>
+                            <ul class="space-y-2 flex-grow">
                                 <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> Unlimited Resume Generations</li>
                                 <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> Unlimited Cover Letters</li>
                                 <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> In-Browser Skill Analysis</li>
                             </ul>
-                            <button class="mt-6 bg-purple-500/80 text-white w-full py-2 rounded font-medium hover:bg-purple-500/100 transition">Start Free Trial</button>
+                            <button class="mt-6 bg-purple-500/80 w-full py-2 rounded font-medium hover:bg-purple-500/100 transition pricing-button">Start Free Trial</button>
                         </div>
 
                         <!-- Student Plan -->
                         <div class="glass-dark p-6 rounded-lg flex flex-col">
-                            <h3 class="text-xl font-bold text-white mb-2">Student Plan</h3>
-                            <p class="text-4xl font-bold mb-4">$5<span class="text-lg font-normal text-[#b0b0b0]">/mo</span></p>
-                            <p class="text-[#b0b0b0] mb-4">or $50 per year. Verified students only.</p>
-                            <ul class="space-y-2 text-[#e0e0e0] flex-grow">
+                            <h3 class="text-xl font-bold mb-2">Student Plan</h3>
+                            <p class="text-4xl font-bold mb-4">$5<span class="text-lg font-normal">/mo</span></p>
+                            <p class="mb-4">or $50 per year. Verified students only.</p>
+                            <ul class="space-y-2 flex-grow">
                                 <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> All Standard Features</li>
                                 <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> University Email Verification</li>
                             </ul>
-                            <button class="mt-6 bg-blue-500/80 text-white w-full py-2 rounded font-medium hover:bg-blue-500/100 transition">Get Student Discount</button>
+                            <button class="mt-6 bg-blue-500/80 w-full py-2 rounded font-medium hover:bg-blue-500/100 transition pricing-button">Get Student Discount</button>
                         </div>
 
                         <!-- University & Career Services -->
                         <div class="glass-dark p-6 rounded-lg flex flex-col lg:col-span-1 md:col-span-2">
-                            <h3 class="text-xl font-bold text-white mb-2">University Partnerships</h3>
-                            <p class="text-4xl font-bold mb-4">$30<span class="text-lg font-normal text-[#b0b0b0]">/seat/yr</span></p>
-                            <p class="text-[#b0b0b0] mb-4">Equip your students for success.</p>
-                            <ul class="space-y-2 text-[#e0e0e0] flex-grow">
+                            <h3 class="text-xl font-bold mb-2">University Partnerships</h3>
+                            <p class="text-4xl font-bold mb-4">$30<span class="text-lg font-normal">/seat/yr</span></p>
+                            <p class="mb-4">Equip your students for success.</p>
+                            <ul class="space-y-2 flex-grow">
                                 <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-2"></i> Co-branding & Onboarding</li>
                                 <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-2"></i> In-portal Integrations</li>
                                 <li class="flex items-center"><i class="fas fa-star text-yellow-400 mr-2"></i> Bulk Seat Licenses</li>
                             </ul>
-                            <button class="mt-6 bg-transparent border border-white/20 text-white w-full py-2 rounded font-medium hover:bg-white/10 transition">Contact for Partnerships</button>
+                            <button class="mt-6 bg-transparent border border-white/20 w-full py-2 rounded font-medium hover:bg-white/10 transition pricing-button">Contact for Partnerships</button>
                         </div>
                     </div>
                 </div>
             </section>
           <!-- CTA Section -->
-            <section class="py-16 text-white">
+            <section class="py-16 section-bg-alt">
                 <div class="container mx-auto px-4 text-center">
                     <h2 class="text-3xl font-bold mb-4">Stop Sending Generic Resumes, Get Taylor Now - It's Free!</h2>
-                    <p class="text-xl text-[#e0e0e0] mb-8 max-w-2xl mx-auto">Let Taylor, your AI Career Stylist, craft custom-fit applications that get noticed.</p>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">Let Taylor, your AI Career Stylist, craft custom-fit applications that get noticed.</p>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                         <a href="https://chromewebstore.google.com/detail/taylor/cbiambcmcjijabimmkcocgpbfocajnbi?utm_source=item-share-cb&authuser=1" class="neu-button-dark px-8 py-4 text-lg font-bold flex items-center justify-center">
                             Install Free Extension
@@ -633,62 +819,62 @@
                 </div>
             </section>
             <!-- Student Developer Section -->
-            <section class="py-12 text-white">
+            <section class="py-12">
                 <div class="container mx-auto px-4">
                     <div class="glass p-8 max-w-3xl mx-auto text-center">
                         <h2 class="text-2xl font-bold mb-4">About the Developer</h2>
-                        <p class="text-[#e0e0e0] mb-6">Taylor is created by an individual student developer passionate about making the job search process easier. Your support and feedback are greatly appreciated as I continue to improve this tool.</p>
+                        <p class="mb-6">Taylor is created by an individual student developer passionate about making the job search process easier. Your support and feedback are greatly appreciated as I continue to improve this tool.</p>
                         
                         <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" target="_blank" class="bg-blue-600/80 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-600/100 transition flex items-center justify-center">
+                            <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" target="_blank" class="bg-blue-600/80 px-6 py-3 rounded-full font-medium transition flex items-center justify-center">
                                 <i class="fab fa-linkedin mr-2"></i> Connect on LinkedIn
                             </a>
-                            <a href="mailto:valluruchetanreddy@gmail.com" class="bg-transparent border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition flex items-center justify-center">
+                            <a href="mailto:valluruchetanreddy@gmail.com" class="bg-transparent border border-white/20 px-6 py-3 rounded-full font-medium transition flex items-center justify-center">
                                 <i class="fas fa-envelope mr-2"></i> Get in Touch
                             </a>
                         </div>
                         
-                        <p class="text-[#b0b0b0] text-sm mt-6">If you find Taylor helpful, sharing with fellow job-seekers is the best way to show support!</p>
+                        <p class="text-sm mt-6">If you find Taylor helpful, sharing with fellow job-seekers is the best way to show support!</p>
                     </div>
                 </div>
             </section>
             <!-- Footer -->
-            <footer class="glass-dark text-white py-12 mt-16">
+            <footer class="glass-dark py-12 mt-16">
                 <div class="container mx-auto px-4">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                         <div>
-                            <h3 class="font-bold mb-4 text-white">Taylor</h3>
+                            <h3 class="font-bold mb-4">Taylor</h3>
                             <ul class="space-y-2">
-                                <li><a href="#features" class="text-[#b0b0b0] hover:text-white transition">Our Secret Sauce</a></li>
-                                <li><a href="#story" class="text-[#b0b0b0] hover:text-white transition">Why It Matters</a></li>
-                                <li><a href="#how-it-works" class="text-[#b0b0b0] hover:text-white transition">How It Works</a></li>
-                                <li><a href="#pricing" class="text-[#b0b0b0] hover:text-white transition">Pricing</a></li>
+                                <li><a href="#features" class="transition">Our Secret Sauce</a></li>
+                                <li><a href="#story" class="transition">Why It Matters</a></li>
+                                <li><a href="#how-it-works" class="transition">How It Works</a></li>
+                                <li><a href="#pricing" class="transition">Pricing</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-bold mb-4 text-white">Resources</h3>
+                            <h3 class="font-bold mb-4">Resources</h3>
                             <ul class="space-y-2">
-                                <li><a href="#" class="text-[#b0b0b0] hover:text-white transition">Blog</a></li>
-                                <li><a href="#" class="text-[#b0b0b0] hover:text-white transition">Guides</a></li>
-                                <li><a href="#" class="text-[#b0b0b0] hover:text-white transition">Support</a></li>
+                                <li><a href="#" class="transition">Blog</a></li>
+                                <li><a href="#" class="transition">Guides</a></li>
+                                <li><a href="#" class="transition">Support</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-bold mb-4 text-white">Legal</h3>
+                            <h3 class="font-bold mb-4">Legal</h3>
                             <ul class="space-y-2">
-                                <li><a href="privacy_policy.html" class="text-[#b0b0b0] hover:text-white transition">Privacy Policy</a></li>
-                                <li><a href="#" class="text-[#b0b0b0] hover:text-white transition">Terms of Service</a></li>
+                                <li><a href="privacy_policy.html" class="transition">Privacy Policy</a></li>
+                                <li><a href="#" class="transition">Terms of Service</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-bold mb-4 text-white">Connect</h3>
+                            <h3 class="font-bold mb-4">Connect</h3>
                             <div class="flex space-x-4 mb-4">
-                                <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" class="text-[#b0b0b0] hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/in/chetan-reddy-valluru-a087261b9/" class="transition"><i class="fab fa-linkedin"></i></a>
                             </div>
-                            <p class="text-[#b0b0b0]">valluruchetanreddy@gmail.com</p>
+                            <p>valluruchetanreddy@gmail.com</p>
                         </div>
                     </div>
-                    <div class="pt-8 border-t border-white/10 text-center text-[#b0b0b0]">
+                    <div class="pt-8 border-t border-gray-200 text-center">
                         <p>© 2025 Taylor AI. All rights reserved.</p>
                     </div>
                 </div>
@@ -830,7 +1016,7 @@
                 heroScrapeBtn.disabled = true;
 
                 setTimeout(() => {
-                    heroDescriptionCard.innerHTML = '<strong>Data Scientist @ Innovate Inc.</strong> ...seeking a candidate with strong Python, SQL, and Machine Learning skills. Experience with cloud platforms like AWS or GCP is a plus. Join our dynamic team...';
+                    heroDescriptionCard.innerHTML = '<strong>Backend AI Engineer [Recent Grad]</strong> About the job The CompanyStandard Practice is building the next generation of foundational tools for medical practices.Over one million healthcare professionals spend 4.5 hours each day on the phone. Standard Practice is a voice AI platform that automates medical practices outbound calls to insurance and pharmacies...';
                     
                     heroSkillsContainer.innerHTML = `
                         <span class="skill-tag skill-tag-has">Python</span>
